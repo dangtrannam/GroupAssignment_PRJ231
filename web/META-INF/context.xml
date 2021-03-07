@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/GroupAssignment_PRJ231"/>
+<Context path="/GroupAssignment_PRJ231">
+<Resource
+name="DBConnection" auth="Container"
+type="javax.sql.DataSource"
+username="sa"
+password="123123"
+driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+url = "jdbc:sqlserver://192.168.165.2:1433;databaseName=GroupAssignment_PRJ"
+> 
+</Resource>
+
+</Context>

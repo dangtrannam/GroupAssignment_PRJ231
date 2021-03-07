@@ -14,17 +14,26 @@ and open the template in the editor.
 }
 body {
     font-family: Arial, Helvetica, sans-serif;
-    /*text-align: center;*/
     font-size: 16px;
 }
+
+.container {
+    padding: 16px;
+    text-align: center;
+    width: 40%;
+    margin: 0 auto;
+}
 form {
-    border: 1px solid #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 40px;
+    border-radius: 2px;
 }
 
 input[type=text], input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
+    height: 50px;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -35,12 +44,16 @@ button {
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
+    height: 50px;
     border: none;
     cursor: pointer;
     width: 100%;
     font-size: 16px;
 }
-
+p{
+    margin: 0;
+    text-align: right;
+}
 a.register{
     background-color: #4CAF50;
     color: white;
@@ -58,14 +71,11 @@ button:hover,a:hover {
     opacity: 0.8;
 }
 
-.container {
-    padding: 16px;
-    text-align: center;
-    width: 50%;
-    margin: 0 auto;
-}
 
 span.psw {
     float: right;
     padding-top: 16px;
+}
+span.message{
+    color: red;
 }

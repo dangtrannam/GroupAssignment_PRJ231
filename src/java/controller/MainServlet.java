@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,22 +26,28 @@ public class MainServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
+
         String action = request.getParameter("action");
         String login = "login&register.jsp";
         String main = "MainServlet";
         String home = "home.jsp";
         if (action == null) {
-            action = "Register";
+            action = "Login";
         }
 
         try {
             if (action.equals("Register")) {
-
                 request.setAttribute("action", "Register");
                 RequestDispatcher rd = request.getRequestDispatcher(login);
                 rd.forward(request, response);
 
+            } else if (action.equals("Login")) {
+                request.setAttribute("action", "Login");
+                RequestDispatcher rd = request.getRequestDispatcher(login);
+                rd.forward(request, response);
+                
             } else if (action.equals("handleLogin")) {
 
                 String userForm = request.getParameter("uname");
@@ -49,16 +56,29 @@ public class MainServlet extends HttpServlet {
                 AccountDAO accDAO = new AccountDAO();
                 acc.setRole(accDAO.login(acc));
 
+                String dest = login;
                 if (!acc.getRole().isEmpty()) {
-                    response.sendRedirect(home);
+                    dest = home;
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", acc);
                 } else {
+                    request.removeAttribute("action");
                     request.setAttribute("action", "Login");
                     request.setAttribute("alert", "Login failed!");
+                }
+                RequestDispatcher rd = request.getRequestDispatcher(dest);
+                rd.forward(request, response);
+
+            } else if (action.equals("handleLogout")) {
+                HttpSession session = request.getSession(false);
+                if (session != null) {
+                    session.removeAttribute("user");
 
                     RequestDispatcher rd = request.getRequestDispatcher(login);
                     rd.forward(request, response);
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
