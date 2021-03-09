@@ -1,81 +1,33 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Mar 4, 2021, 3:27:22 PM
-    Author     : macbookpro2018
-*/
 
-*{
-    text-decoration: none;
-    box-sizing: border-box;
+.login-container{
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+.login-form-1{
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
-
-.container {
-    padding: 16px;
+.login-form-1 h3{
     text-align: center;
-    width: 40%;
-    margin: 0 auto;
+    color: #333;
 }
-form {
-    border: 1px solid #ccc;
-    padding: 40px;
-    border-radius: 2px;
+.login-container form{
+    padding: 10%;
 }
-
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    height: 50px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    height: 50px;
+.btnSubmit
+{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
     border: none;
     cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-}
-p{
-    margin: 0;
-    text-align: right;
-}
-a.register{
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    display: block;
-    font-size: 16px;
-
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
 }
 
-button:hover,a:hover {
-    opacity: 0.8;
-}
-
-
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-span.message{
-    color: red;
+.ForgetPwd{
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
 }

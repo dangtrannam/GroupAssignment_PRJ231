@@ -8,6 +8,7 @@ package controller;
 import daos.AccountDAO;
 import dtos.Account;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 
 import javax.servlet.ServletException;
@@ -33,51 +34,23 @@ public class MainServlet extends HttpServlet {
         String login = "login&register.jsp";
         String main = "MainServlet";
         String home = "home.jsp";
+        String loginServlet="Login";
         if (action == null) {
             action = "Login";
         }
-
+        ArrayList<String> loginActions = new ArrayList<String>();
+        loginActions.add("Login");
+        loginActions.add("Register");
+        loginActions.add("handleLogin");
+        loginActions.add("handleRegister");
+        
         try {
-            if (action.equals("Register")) {
-                request.setAttribute("action", "Register");
-                RequestDispatcher rd = request.getRequestDispatcher(login);
-                rd.forward(request, response);
-
-            } else if (action.equals("Login")) {
-                request.setAttribute("action", "Login");
-                RequestDispatcher rd = request.getRequestDispatcher(login);
-                rd.forward(request, response);
-                
-            } else if (action.equals("handleLogin")) {
-
-                String userForm = request.getParameter("uname");
-                String passForm = request.getParameter("psw");
-                Account acc = new Account(userForm, passForm, "");
-                AccountDAO accDAO = new AccountDAO();
-                acc.setRole(accDAO.login(acc));
-
-                String dest = login;
-                if (!acc.getRole().isEmpty()) {
-                    dest = home;
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user", acc);
-                } else {
-                    request.removeAttribute("action");
-                    request.setAttribute("action", "Login");
-                    request.setAttribute("alert", "Login failed!");
-                }
-                RequestDispatcher rd = request.getRequestDispatcher(dest);
-                rd.forward(request, response);
-
-            } else if (action.equals("handleLogout")) {
-                HttpSession session = request.getSession(false);
-                if (session != null) {
-                    session.removeAttribute("user");
-
-                    RequestDispatcher rd = request.getRequestDispatcher(login);
-                    rd.forward(request, response);
-                }
+            if (loginActions.contains(action)) {
+                request.setAttribute("action", action);
+                RequestDispatcher rd = request.getRequestDispatcher(loginServlet);
+                rd.include(request, response);
             }
+            
 
         } catch (Exception e) {
             e.printStackTrace();
