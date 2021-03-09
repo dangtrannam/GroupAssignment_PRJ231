@@ -2,17 +2,6 @@ button.login {
   margin-left: 11px;
 }
 
-.main {
-  padding: 10px;
-}
-
-.test {
-  background-color: #42b729;
-  margin-left: 15px;
-  margin-bottom: 10px;
-  color: white;
-}
-
 .panel {
   border: 1px solid #37a5f3;
   margin: 10px auto;
@@ -33,16 +22,18 @@ header h1 {
   background-color: rgba(240, 255, 255, 0.4);
 }
 
-
-.btn-success {
-  width: 85px;
+.btn-cauhoi{
+  margin: 0 .15em;
+  margin-bottom: .3em;
+  font-size: 1.2em;
+  width: 2.4rem;
 }
 
-.btn-success-1 {
-  width: 200px;
+label.btn-cauhoi input[type=radio]{
+  opacity: 0;
 }
 
-strong {
-  color: red;
-  font-weight: 700;
+.ndcauhoi{
+  margin: 0 10px;
+  display: block;
 }
