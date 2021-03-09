@@ -1,0 +1,54 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dtos;
+
+/**
+ *
+ * @author OS
+ */
+public class Question {
+ private String ID;
+ private String QuizID;
+ private String Content;
+
+    public Question(String ID, String QuizID, String Content) {
+        this.ID = ID;
+        this.QuizID = QuizID;
+        this.Content = Content;
+    }
+
+    public Question() {
+        ID="";
+        QuizID="";
+        Content="";
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getQuizID() {
+        return QuizID;
+    }
+
+    public void setQuizID(String QuizID) {
+        this.QuizID = QuizID;
+    }
+
+    public String getContent() {
+        return Content;
+    }
+
+    public void setContent(String Content) {
+        this.Content = Content;
+    }
+    
+ 
+}
