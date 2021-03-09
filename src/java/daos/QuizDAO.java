@@ -62,7 +62,10 @@ public class QuizDAO {
                 pstm.setString(1, QuizID);
                 rs = pstm.executeQuery();
                 while (rs.next()) {
-                    list.add(new Question(rs.getString("ID"), rs.getString("QuizID"), rs.getString("Content")));
+                    list.add(new Question(rs.getString("ID"),
+                            rs.getString("QuizID"),
+                            rs.getString("Content"),
+                            rs.getString("url")));
                 }
             }
         } finally {
@@ -93,7 +96,9 @@ public class QuizDAO {
                 pstm.setString(1, QuestionID);
                 rs = pstm.executeQuery();
                 while (rs.next()) {
-                    list.add(new Answer(rs.getString("QuestionID"), rs.getString("Content"), rs.getString("isCorrect")));
+                    list.add(new Answer(rs.getString("QuestionID"),
+                            rs.getString("Content"),
+                            rs.getString("isCorrect")));
                 }
             }
         } finally {
@@ -109,6 +114,7 @@ public class QuizDAO {
         }
         return list;
     }
+
     public static void main(String[] agrs) throws NamingException, SQLException {
 //        QuizDAO accDAO = new QuizDAO();
 //        Account acc = new Account("user1", "123123", "user");
