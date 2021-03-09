@@ -4,6 +4,7 @@ import dbhelper.DBUtils;
 import dtos.Account;
 import dtos.Answer;
 import dtos.Question;
+import dtos.Quiz;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public class QuizDAO {
         return list;
     }
 
-    public ArrayList<Question> getQuestionsbyQuizID(String QuizID) throws NamingException, SQLException {
+    public Quiz getQuizbyQuizID(String QuizID) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -65,7 +66,8 @@ public class QuizDAO {
                     list.add(new Question(rs.getString("ID"),
                             rs.getString("QuizID"),
                             rs.getString("Content"),
-                            rs.getString("url")));
+                            rs.getString("url"),
+                            getAnswersbyQuestionID(rs.getString("ID"))));
                 }
             }
         } finally {
@@ -79,7 +81,7 @@ public class QuizDAO {
                 con.close();
             }
         }
-        return list;
+        return new Quiz(list);
     }
 
     public ArrayList<Answer> getAnswersbyQuestionID(String QuestionID) throws NamingException, SQLException {
