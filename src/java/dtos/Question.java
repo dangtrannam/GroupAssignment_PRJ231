@@ -5,6 +5,8 @@
  */
 package dtos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author OS
@@ -14,13 +16,16 @@ public class Question {
  private String QuizID;
  private String Content;
  private String url;
+ private ArrayList<Answer> ListAnswer;
 
-    public Question(String ID, String QuizID, String Content,String url) {
+    public Question(String ID, String QuizID, String Content, String url, ArrayList<Answer> ListAnswer) {
         this.ID = ID;
         this.QuizID = QuizID;
         this.Content = Content;
-        this.url=url;
+        this.url = url;
+        this.ListAnswer = ListAnswer;
     }
+   
 
     public Question() {
         ID="";
@@ -61,5 +66,11 @@ public class Question {
         this.Content = Content;
     }
     
- 
+     public ArrayList<Answer> getListAnswer() {
+        return ListAnswer;
+    }
+
+    public void setListAnswer(ArrayList<Answer> ListAnswer) {
+        this.ListAnswer = ListAnswer;
+    }
 }
