@@ -13,21 +13,32 @@ public class Question {
  private String ID;
  private String QuizID;
  private String Content;
+ private String url;
 
-    public Question(String ID, String QuizID, String Content) {
+    public Question(String ID, String QuizID, String Content,String url) {
         this.ID = ID;
         this.QuizID = QuizID;
         this.Content = Content;
+        this.url=url;
     }
 
     public Question() {
         ID="";
         QuizID="";
         Content="";
+        url="";
     }
 
     public String getID() {
         return ID;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void setID(String ID) {
