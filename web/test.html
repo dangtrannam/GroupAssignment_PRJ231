@@ -8,8 +8,8 @@
   <title>Thi bằng lái xe A1</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="./assets/css/Footer-Basic.css">
-  <link rel="stylesheet" href="./assets/css/test.css">
+
+  <link rel="stylesheet" href="./css/test.css">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
       <!-- Start: Navigation with Search -->
       <nav role="navigation"
         class="navbar navbar-dark navbar-expand-md bg-success border rounded navigation-clean-search">
-        <div class="container"><a class="navbar-brand" href="#">Luyện thi bằng lái</a>
+        <div class="container"><a class="navbar-brand" href="home.html">Luyện thi bằng lái</a>
           <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -29,10 +29,9 @@
               <li class="nav-item"><a class="nav-link" href="#">Thi thử A2</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Thi thử B1</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Thi thử B2</a></li>
-
             </ul>
-            <button class="btn btn-primary btn-sm login float-md-right" type="button">Đăng nhập</button>
-            <button class="btn btn-primary btn-sm login float-md-right" type="button">Đăng xuất</button>
+            <button class="btn btn-primary btn-sm login" type="button">Đăng nhập</button>
+            <button class="btn btn-primary btn-sm login" type="button">Đăng xuất</button>
           </div>
         </div>
       </nav><!-- End: Navigation with Search -->
@@ -44,86 +43,142 @@
 
   <main>
     <div class="container">
-      <div class="row">
+      <form action="" name="f-doquiz" method="post">
+        <div class="row">
 
-        <div class="col-md-4">
-          <div class="panel panel-default" id="blockA">
-            <div class="panel-body">
-              <div style="margin: bottom 10px;">
-                <strong style="font-size: 12pt; color: blue;">Câu hỏi | Đề số 01 - 200 câu hỏi thi A1</strong>
+          <div class="col-md-4">
+            <div class="panel panel-default" id="blockA">
+              <div class="panel-body">
+                <div style="margin: bottom 10px;">
+                  <strong style="font-size: 12pt; color: blue;">Câu hỏi | Đề số 01 - 200 câu hỏi thi A1</strong>
+                </div>
+                <div id="questionList">
+                  <label class="btn btn-success btn-cauhoi clickcauhoi btn-1 active" id="ques1">
+                    <input type="radio" id="1">1
+
+                  </label>
+                  <label class="btn btn-success btn-cauhoi clickcauhoi btn-2" id="ques2">
+                    <input type="radio" id="2">2
+                  </label>
+                </div>
+
+
+
+
               </div>
-
-              <label class="btn btn-success btn-cauhoi clickcauhoi btn-1 active" id="show1"
-                name="chuyen_radio_tab_or_button" data-id="data1">
-                <input type="radio" id="1" name="" data-id="data1">
-
-              </label>
-              <label class="btn btn-success btn-cauhoi clickcauhoi btn-2 active" id="show2" data-id="data2">
-                <input type="radio" id="2" name="" data-id="data2">
-              </label>
-
-
-
             </div>
           </div>
-        </div>
-        <div class="col-md-8">
-          <div class="panel panel-default" id="blockD">
-            <div class="panel-body">
-              <div>
-                <div class="row ndcauhoi" id="data1">
-                  <div class="row">
-                    <div class="text-primary">
-                      <strong>Câu hỏi 1</strong>
+
+          <div class="col-md-8">
+            <div class="panel panel-default" id="blockD">
+              <div class="panel-body">
+                <div>
+                  <div class="row d-block ndcauhoi" id="data1">
+                    <div class="row">
+                      <div class="col-md-12 text-primary">
+                        <strong>Câu hỏi 1:</strong>
+                      </div>
+
+                      <div class="col-12" style="text-align: justify;">
+                        <strong>Phần của đường bộ được sử dụng cho các phương tiện giao thông qua lại là gì ?</strong>
+                      </div>
+                      <img class="col-12 img-responsive" src="" alt="">
+
+                      <div class="col-md-12">
+                        <div class="cautraloi">
+                          <label class="checkbox-inline">
+                            <input type="radio" class="answer" name="1[]" value="Phần mặt đường và lề đường"> 1- Phần
+                            mặt
+                            đường và lề đường.
+                          </label>
+                        </div>
+                        <div class="cautraloi">
+                          <label class="checkbox-inline">
+                            <input type="radio" class="answer" name="1[]" value="Phần mặt đường và lề đường"> 2- Phần
+                            đường xe chạy.
+                          </label>
+                        </div>
+                        <div class="cautraloi">
+                          <label class="checkbox-inline">
+                            <input type="radio" class="answer" name="1[]" value="Phần mặt đường và lề đường"> 3- Phần
+                            đường xe cơ giới.
+                          </label>
+                        </div>
+                      </div>
                     </div>
-                    <img class="img-responsive" src="" alt="">
-                    <div class="col-md-12">
-                      <div class="cautraloi">
-                        <label class="checkbox-inline">
-                          <input type="radio" class="answer" name="1[]" value="Phần mặt đường và lề đường"> ádfádf
-                        </label>
-                      </div>
-                      <div class="cautraloi">
-                        <label class="checkbox-inline">
-                          <input type="radio" class="answer" name="1[]" value="Phần mặt đường và lề đường"> ádfádf
-                        </label>
-                      </div>
-                      <div class="cautraloi">
-                        <label class="checkbox-inline">
-                          <input type="radio" class="answer" name="1[]" value="Phần mặt đường và lề đường"> ádfádf
-                        </label>
-                      </div>
+                    <div class="row">
+
                     </div>
                   </div>
-                  <div class="row"></div>
-                </div>
-              </div>
-              <div>
 
+                  <div class="row d-none ndcauhoi" id="data2">
+                    <div class="row">
+                      <div class="col-md-12 text-primary">
+                        <strong>Câu hỏi 1:</strong>
+                      </div>
+
+                      <div class="col-12" style="text-align: justify;">
+                        <strong>Phần của đường bộ được sử dụng cho các phương tiện giao thông qua lại là gì ?</strong>
+                      </div>
+                      <img class="col-12 img-responsive" src="" alt="">
+
+                      <div class="col-md-12">
+                        <div class="cautraloi">
+                          <label class="checkbox-inline">
+                            <input type="radio" class="answer" name="1[]" value="Phần mặt đường và lề đường"> ádfádf
+                          </label>
+                        </div>
+                        <div class="cautraloi">
+                          <label class="checkbox-inline">
+                            <input type="radio" class="answer" name="1[]" value="Phần mặt đường và lề đường"> ádfádf
+                          </label>
+                        </div>
+                        <div class="cautraloi">
+                          <label class="checkbox-inline">
+                            <input type="radio" class="answer" name="1[]" value="Phần mặt đường và lề đường"> ádfádf
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div>
+                    <ul class="pager d-flex justify-content-around">
+                      <li class="previous cautruoc btn btn-primary float-left ">Câu trước</li>
+                      <li class="next causau btn btn-primary float-right">Câu sau</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-      </div>
+        </div>
+      </form>
     </div>
 
   </main>
 
 
-
-  <footer class="footer footer-basic panel col-md-8 offset-md-2">
+  <footer>
     <div class="container">
-      <!-- Start: Links -->
-      <ul class="list-inline">
-        <li class="list-inline-item"><a href="#">Home</a></li>
-        <li class="list-inline-item"><a href="#">Services</a></li>
-        <li class="list-inline-item"><a href="#">About</a></li>
-        <li class="list-inline-item"><a href="#">Terms</a></li>
-        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-      </ul><!-- End: Links -->
-      <!-- Start: Copyright -->
-      <p class="copyright">FPT University © 2021</p><!-- End: Copyright -->
+      <div class="footer-basic panel">
+        <!-- Start: Links -->
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Home</a></li>
+          <li class="list-inline-item"><a href="#">Services</a></li>
+          <li class="list-inline-item"><a href="#">About</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul><!-- End: Links -->
+        <!-- Start: Copyright -->
+        <p class="copyright">FPT University © 2021</p><!-- End: Copyright -->
+      </div>
     </div>
   </footer>
 </body>
@@ -137,9 +192,19 @@
   integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
   integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
 <script>
-  $(document).ready(function () {
-    // alert("helloword");
-    $("input[name='chuyen_radio_tab_or_button']:eq(0)").attr("checked", "checked");
-  });
+  let questions = $('.clickcauhoi');
+  console.log(questions);
+
+  let viewQuestion = (id) => {
+    // let index = this.id.slice(-1);
+    console.log(id);
+  };
+
+  let questionList = $("#questionList");
+  let data = $("<div />")
+  questionList.append()
 </script>
