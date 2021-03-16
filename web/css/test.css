@@ -141,3 +141,15 @@ label.btn-cauhoi {
     color: #aaa;
     margin-bottom: 0;
 }
+
+div#blockB{
+    padding: 10px 10px;
+}
+
+input#nopbai{
+    display: inline-block;
+    width: 100%;
+    background-color: #0169DA;
+    color: white;
+    padding: 10px;
+}
