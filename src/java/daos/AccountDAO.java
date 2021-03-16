@@ -14,10 +14,24 @@ import javax.naming.NamingException;
  */
 public class AccountDAO {
 
+    private Connection con;
+    private PreparedStatement pstm;
+    private ResultSet rs;
+
+    private void closeConnection() throws SQLException {
+        if (rs != null) {
+            rs.close();
+        }
+        if (pstm != null) {
+            pstm.close();
+        }
+        if (con != null) {
+            con.close();
+        }
+    }
+
     public String login(Account acc) throws NamingException, SQLException {
-        Connection con = null;
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
+
         String sql = "SELECT * FROM Account WHERE UserName=?";
         try {
             con = DBUtils.makeConnection();
@@ -37,22 +51,12 @@ public class AccountDAO {
                 }
             }
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (pstm != null) {
-                pstm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
+            closeConnection();
         }
         return "";
     }
 
     public boolean register(Account acc) throws NamingException, SQLException {
-        Connection con = null;
-        PreparedStatement pstm = null;
 
         String sql = "INSERT into Account values(?,?,?)";
         try {
@@ -69,20 +73,16 @@ public class AccountDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (pstm != null) {
-                pstm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
+            closeConnection();
         }
         return false;
     }
-    public static void main(String[] agrs) throws NamingException, SQLException{
-        AccountDAO accDAO = new AccountDAO();
-        Account acc = new Account("user1","123123","user");
-        boolean check = accDAO.register(acc);
-        System.out.println(check);
-    }
+
+//    public static void main(String[] agrs) throws NamingException, SQLException {
+//        AccountDAO accDAO = new AccountDAO();
+//        Account acc = new Account("user1", "123123", "user");
+//        boolean check = accDAO.register(acc);
+//        System.out.println(check);
+//    }
 
 }

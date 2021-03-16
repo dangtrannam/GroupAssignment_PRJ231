@@ -12,11 +12,13 @@ import java.util.ArrayList;
  * @author OS
  */
 public class Quiz {
+
     private ArrayList<Question> list;
 
     public Quiz() {
-        list=new ArrayList();
+        list = new ArrayList();
     }
+
     public Quiz(ArrayList<Question> list) {
         this.list = list;
     }
@@ -28,5 +30,5 @@ public class Quiz {
     public void setList(ArrayList<Question> list) {
         this.list = list;
     }
-    
+
 }

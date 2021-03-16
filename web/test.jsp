@@ -60,6 +60,13 @@
         </header>
 
         <main>
+            <c:if test="${not empty requestScope.ChosenAns}">
+                <c:set var="state" value="review" />
+                <c:set var="chosenAnsList" value="${requestScope.ChosenAns}" />
+                <c:set var="grade" value="${requestScope.grade}" />
+            </c:if>
+
+
             <div class="container">
                 <form action="MainServlet?action=Submit" name="f-doquiz" method="post">
                     <div class="row">
@@ -72,10 +79,12 @@
                                     </div>
                                     <div id="questionList">
                                         <c:forEach var="btn" begin="1" end="25">
-                                            <label class="btn btn-success btn-cauhoi clickcauhoi btn-${btn}" id="show${btn}" data-id="data${btn}">
+                                            
+                                            <label class="btn btn-success btn-cauhoi clickcauhoi btn-${btn} " id="show${btn}" data-id="data${btn}">
                                                 <input type="radio" id="${btn}" data-id="data${btn}" >
-                                                ${btn}
+                                                ${btn} 
                                             </label>
+
                                         </c:forEach>
                                     </div>
                                 </div>
@@ -99,56 +108,75 @@
                                         <c:set var="questions" value="${Quiz.getList()}"></c:set>
                                         <input type="hidden" name="QuizID" value="${Quiz.getList().get(0).getQuizID()}">
                                         <c:set var="i" value="0"/>
-                                        
-                                        
+
+
                                         <c:forEach items="${questions}" var="question">
                                             <c:set var="i" value="${i+1}"/>
                                             <div class="row d-none ndcauhoi" id="cauhoi${i}"/>
-                                                <div class="row">
-                                                    <div class="col-md-12 text-primary">
-                                                        <strong>Câu hỏi ${i}:</strong>
-                                                    </div>
-
-                                                    <div class="col-12" style="text-align: justify;">
-                                                        <strong>${question.getContent()}</strong>
-                                                    </div>
-                                                    <img class="col-12 img-responsive" src="" alt="">
-                                                    <c:set var="answers" value="${question.getListAnswer()}"></c:set>
-                                                    <div class="col-md-12">
-                                                        <c:set var="j" value="0"/>
-                                                    <c:forEach items="${answers}" var="answer">
-                                                        <div class="cautraloi">
-                                                            <label class="checkbox-inline">
-                                                                <input type="radio" class="answer" name="${i-1}" value="${j}">${answer.getContent()}
-                                                            </label>
-                                                        </div>
-                                                            <c:set var="j" value="${j+1}"/>
-                                                    </c:forEach>
-                                                    </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-primary">
+                                                    <strong>Câu hỏi ${i}:</strong>
                                                 </div>
 
+                                                <div class="col-12" style="text-align: justify;">
+                                                    <strong>${question.getContent()}</strong>
+                                                </div>
+                                                <img class="col-12 img-responsive" src="" alt="">
+
+
+                                                <c:set var="answers" value="${question.getListAnswer()}"></c:set>
+                                                    <div class="col-md-12">
+                                                    <c:set var="j" value="0"/>
+                                                    <c:forEach items="${answers}" var="answer">
+
+                                                        <c:set var="checked" value="" />
+                                                        <c:if test="${state=='review'}" var="testState">
+                                                            <c:set var="isRight" value="text-danger" />
+
+                                                            <c:if test="${chosenAnsList.get(i-1) == j}" var="choseRight">
+                                                                <c:set var="checked" value="checked" />
+                                                            </c:if>
+                                                            <c:if test="${answer.getIsCorrect().trim()=='true'}" var="IsRight">
+                                                                <c:set var="isRight" value="text-success" />
+                                                            </c:if>
+                                                        </c:if>
+
+
+                                                        <div class="cautraloi">
+                                                            <label class="checkbox-inline ${isRight}">
+                                                                <input type="radio" class="answer " name="${i-1}" value="${j}" ${checked} > ${answer.getContent()}
+                                                            </label>
+                                                        </div>
+
+
+                                                        <c:set var="j" value="${j+1}"/>
+
+                                                    </c:forEach>
+                                                </div>
                                             </div>
-                                        </c:forEach>
+
+                                        </div>
+                                    </c:forEach>
 
 
-                                    </div>
                                 </div>
+                            </div>
 
+                            <div>
                                 <div>
-                                    <div>
-                                        <ul class="pager d-flex justify-content-around">
-                                            <li id="prev" class="previous cautruoc btn btn-primary float-left ">Câu trước</li>
-                                            <li id="next" class="next causau btn btn-primary float-right">Câu sau</li>
-                                        </ul>
-                                    </div>
+                                    <ul class="pager d-flex justify-content-around">
+                                        <li id="prev" class="previous cautruoc btn btn-primary float-left ">Câu trước</li>
+                                        <li id="next" class="next causau btn btn-primary float-right">Câu sau</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-
             </div>
-        </form>
-    </div>
+
+        </div>
+    </form>
+</div>
 
 </main>
 

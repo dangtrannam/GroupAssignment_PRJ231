@@ -23,26 +23,34 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author OS
  */
-public class ChooseQuizController extends HttpServlet { private static final String ERROR = "error.jsp";
+public class ChooseQuizController extends HttpServlet {
+
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "test.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        System.out.println("asdasdasd");
+        
+        System.out.println("In.... ChooseQuizController.....");
+        
         String quiz = (String) request.getParameter("QuizID");
         System.out.println(quiz);
+        
         String url = ERROR;
+        
         try {
             QuizDAO dao = new QuizDAO();
-            Quiz Quiz=dao.getQuizbyQuizID(quiz);
+            Quiz Quiz = dao.getQuizbyQuizID(quiz);
+            
             request.setAttribute("Quiz", Quiz);
             request.setAttribute("QuizType", request.getParameter("Type"));
-            System.out.println(request.getParameter("Type"));
             
-            url="test.jsp";
+            System.out.println(request.getParameter("Type"));
+
+            url = SUCCESS;
         } catch (SQLException | NamingException e) {
-            log("Error at viewQuizController: " + e.getMessage());
+            log("Error at ChooseQuizController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
@@ -60,13 +68,13 @@ public class ChooseQuizController extends HttpServlet { private static final Str
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    try {
-        processRequest(request, response);
-    } catch (NamingException ex) {
-        Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            processRequest(request, response);
+        } catch (NamingException ex) {
+            Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -80,13 +88,13 @@ public class ChooseQuizController extends HttpServlet { private static final Str
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    try {
-        processRequest(request, response);
-    } catch (NamingException ex) {
-        Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            processRequest(request, response);
+        } catch (NamingException ex) {
+            Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
