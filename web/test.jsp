@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Thi báº±ng lÃ¡i xe A1</title>
+        <title>Thi bằng lái xe A1</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -35,9 +35,7 @@
                             </ul>
 
                             <div>
-                                <c:if test="${requestScope.action eq 'avc'}">
-                                    
-                                </c:if>
+                               
                                 <c:choose >
                                     <c:when  test="${not empty sessionScope.user.userName}">
                                         <!--TODO: ViewProfile-->
@@ -81,17 +79,19 @@
                                                 ${btn}
                                             </label>
                                         </c:forEach>
-
-
-
-
                                     </div>
-
-
-
-
                                 </div>
                             </div>
+                            <div id="blockB" class="panel panel-default">
+                                <strong style="font-size:12pt; color:blue"> Thời gian còn lại:  <span id="countdown" class="timer"></span></strong>
+                                
+                            </div>
+                            <div id="blockC" class="panel panel-default">
+                                <div>
+                                    <input type="submit" name="nopbai" id="nopbai" value="Nộp bài">
+                                </div>
+                            </div>
+                            
                         </div>
 
                         <div class="col-md-8">
@@ -103,7 +103,7 @@
                                             <div class="row d-none ndcauhoi" id="cauhoi${i}">
                                                 <div class="row">
                                                     <div class="col-md-12 text-primary">
-                                                        <strong>Câu hỏi 1:</strong>
+                                                        <strong>Câu hỏi ${i}:</strong>
                                                     </div>
 
                                                     <div class="col-12" style="text-align: justify;">

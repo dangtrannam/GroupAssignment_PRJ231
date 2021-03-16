@@ -55,6 +55,8 @@ public class MainServlet extends HttpServlet {
         loginActions.add("Logout");
 
         try {
+            HttpSession session = request.getSession();
+            
             if (loginActions.contains(action)) {
                 request.setAttribute("action", action);
                 url = loginServlet;
