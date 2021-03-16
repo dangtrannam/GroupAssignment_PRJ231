@@ -41,6 +41,7 @@ public class SubmitController extends HttpServlet {
             Quiz quiz = dao.getQuizbyQuizID(QuizID);
             ArrayList<Question> questions = quiz.getList();
             ArrayList<Integer> chosenAns=new ArrayList<>();
+            
             int grade = 0;
             int i;
             for (i = 0; i < questions.size(); i++) {
