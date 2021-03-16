@@ -46,6 +46,8 @@ public class MainServlet extends HttpServlet {
         if (action == null) {
             url = homepage;
         }
+        
+        
         ArrayList<String> loginActions = new ArrayList<String>();
         loginActions.add("Login");
         loginActions.add("Register");

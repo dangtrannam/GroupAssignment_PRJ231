@@ -19,14 +19,14 @@
                 <!-- Start: Navigation with Search -->
                 <nav role="navigation"
                      class="navbar navbar-dark navbar-expand-md bg-success border rounded navigation-clean-search relative">
-                    <div class="container"><a class="navbar-brand" href="#">Trang chủ</a>
+                    <div class="container"><a class="navbar-brand active homepage" href="#">Trang chủ</a>
                         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navcol-1">
                             <ul class="nav navbar-nav">
-                                <li class="nav-item active"><a class="nav-link" href="#">Thi thử­ A1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­ A1</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ A2</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ B1</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ B2</a></li>
@@ -37,16 +37,16 @@
                                 <c:choose >
                                     <c:when  test="${not empty sessionScope.user.userName}">
                                         <c:url value="MainServlet?action=ViewProfile" var ="profileLink"></c:url>
-                                        <a  href="${profileLink}" class="btn btn-primary btn-sm login " >Welcome <c:out value = "${sessionScope.user.userName}" /></a>
+                                        <a  href="${profileLink}" class="btn  btn-sm login " >Welcome <c:out value = "${sessionScope.user.userName}" /></a>
                                     </c:when>
                                     <c:otherwise>
                                         <c:url value="MainServlet?action=Login" var ="LoginLink"></c:url>
-                                        <a  href="${LoginLink}" class="btn btn-primary btn-sm login " >Đăng nhập</a>
+                                        <a  href="${LoginLink}" class="btn  btn-sm login " >Đăng nhập</a>
                                     </c:otherwise>
                                 </c:choose>
 
                                 <c:url value="MainServlet?action=Logout" var="LogoutLink"></c:url>
-                                <a href="${LogoutLink}" class="btn btn-primary btn-sm logout ">Đăng xuất</a>
+                                <a href="${LogoutLink}" class="btn btn-sm logout ">Đăng xuất</a>
                             </div>
 
                         </div>
