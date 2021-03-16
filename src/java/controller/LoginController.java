@@ -21,31 +21,32 @@ import javax.servlet.http.HttpSession;
  *
  * @author macbookpro2018
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
+public class LoginController extends HttpServlet {
+
+    private static final String ERROR = "error.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
         String action = request.getParameter("action");
+        
         String login = "login&register.jsp";
         String main = "MainServlet";
-        String home = "home.jsp";
-
+        String homepage = "home.jsp";
+        
+        String url = ERROR;
         if (action == null) {
-            action = "Login";
-        }
+            url = main;
+        }else url = login;
+
         try {
             if (action.equals("Register")) {
                 request.setAttribute("action", "Register");
-                RequestDispatcher rd = request.getRequestDispatcher(login);
-                rd.forward(request, response);
-
+                
             } else if (action.equals("Login")) {
                 request.setAttribute("action", "Login");
-                RequestDispatcher rd = request.getRequestDispatcher(login);
-                rd.forward(request, response);
 
             } else if (action.equals("handleLogin")) {
 
@@ -55,9 +56,9 @@ public class Login extends HttpServlet {
                 AccountDAO accDAO = new AccountDAO();
                 acc.setRole(accDAO.login(acc));
 
-                String dest = login;
                 if (!acc.getRole().isEmpty()) {
-                    dest = home;
+                    
+                    url = homepage;
                     HttpSession session = request.getSession();
                     session.setAttribute("user", acc);
                 } else {
@@ -65,16 +66,13 @@ public class Login extends HttpServlet {
                     request.setAttribute("action", "Login");
                     request.setAttribute("msg", "Login failed!");
                 }
-                RequestDispatcher rd = request.getRequestDispatcher(dest);
-                rd.forward(request, response);
 
-            } else if (action.equals("handleLogout")) {
+            } else if (action.equals("Logout")) {
                 HttpSession session = request.getSession(false);
                 if (session != null) {
                     session.removeAttribute("user");
-
-                    RequestDispatcher rd = request.getRequestDispatcher(login);
-                    rd.forward(request, response);
+                    
+                    request.setAttribute("action", "Login");
                 }
             } else if (action.equals("handleRegister")) {
                 String userForm = request.getParameter("uname");
@@ -93,12 +91,12 @@ public class Login extends HttpServlet {
 
                 request.setAttribute("msg", msg);
                 request.setAttribute("action", "Login");
-                RequestDispatcher rd = request.getRequestDispatcher(login);
-                rd.forward(request, response);
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log("Error at LoginController: "+e.getMessage());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

@@ -1,8 +1,9 @@
-*{
+* {
   box-sizing: border-box;
   text-decoration: none;
 }
-ul li{
+
+ul li {
   list-style: none;
 }
 
@@ -30,33 +31,37 @@ header h1 {
   background-color: rgba(240, 255, 255, 0.4);
 }
 
-.btn-cauhoi{
+.btn-cauhoi {
   margin: 0 .15em;
   margin-bottom: .3em;
   font-size: 1.2em;
   width: 2.4rem;
 }
 
-label.btn-cauhoi input[type=radio]{
+label.btn-cauhoi input[type=radio] {
   opacity: 0;
+  display: contents;
 }
-label.btn-cauhoi{
+
+label.btn-cauhoi {
   text-align: left;
 }
 
-.ndcauhoi{
+.ndcauhoi {
   margin: 0 10px;
 }
-.panel-body{
+
+.panel-body {
   padding: 15px;
 }
 
-.pager{
+.pager {
   padding-left: 0;
   margin: 20px 0;
   text-align: center;
 }
-.pager li{
+
+.pager li {
   display: inline;
 }
 

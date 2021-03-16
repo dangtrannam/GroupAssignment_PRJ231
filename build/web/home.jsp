@@ -1,41 +1,118 @@
-<%-- Document : home Created on : Mar 4, 2021, 4:00:44 PM Author : macbookpro2018 --%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<!DOCTYPE html>
+<html lang="en">
 
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
-        <!DOCTYPE html>
-        <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Homepage</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/home.css">
+    </head>
 
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Home Page</title>
-        </head>
+    <body>
+        <header>
+            <div class="container">
+                <!-- Start: Navigation with Search -->
+                <nav role="navigation"
+                     class="navbar navbar-dark navbar-expand-md bg-success border rounded navigation-clean-search relative">
+                    <div class="container"><a class="navbar-brand" href="#">Trang chủ</a>
+                        <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navcol-1">
+                            <ul class="nav navbar-nav">
+                                <li class="nav-item active"><a class="nav-link" href="#">Thi thử­ A1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ A2</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ B1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ B2</a></li>
 
-        <body>
-            <header class="header">
+                            </ul>
+
+                            <div>
+                                <c:choose >
+                                    <c:when  test="${not empty sessionScope.user.userName}">
+                                        <c:url value="MainServlet?action=ViewProfile" var ="profileLink"></c:url>
+                                        <a  href="${profileLink}" class="btn btn-primary btn-sm login " >Welcome <c:out value = "${sessionScope.user.userName}" /></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:url value="MainServlet?action=Login" var ="LoginLink"></c:url>
+                                        <a  href="${LoginLink}" class="btn btn-primary btn-sm login " >Đăng nhập</a>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <c:url value="MainServlet?action=Logout" var="LogoutLink"></c:url>
+                                <a href="${LogoutLink}" class="btn btn-primary btn-sm logout ">Đăng xuất</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </nav>
+                <h1 class="text-center text-white bg-info">ĐỀ THI THỬ BẰNG LÁI XE A1 200 CÂU HỎI MỚI NHẤT 2020</h1>
+
+            </div>
+
+        </header>
+
+        <main>
+            <div class="row">
                 <div class="container">
-                    <nav>
-                        <a href="#">Thi thử A1</a>
-                        <a href="#">Thi thử A2</a>
-                        <a href="#">Thi thử B2</a>
-                        <a href="#">Thi 20 câu điểm liệt</a>
-                        <a href="#">Thi 50 câu điểm liệt</a>
-                        <a href="#">Thi 60 câu điểm liệt</a>
-                    </nav>
+                    <div class="panel main">
+                        <h3 class="text-center text-primary">BỘ ĐỀ THI THỬ BẰNG LÁI XE MÁY A1 CHÍNH THỨC TỪ 01/08/2020</h3>
+                        <p>Cấu trúc bộ đề thi sát hạch giấy phép lái xe hạng A1 sẽ bao gồm 25 câu hỏi, mỗi câu hỏi chỉ có duy nhất 
+                            1 đáp trả lời đúng phản ánh đúng bản chất của thi trắc nghiệm. Khác hẳn với bộ đề thi luật cũ là 2 đáp án. Mỗi đề thi chúng tôi sẽ bố trí từ 2 - 4 
+                            câu hỏi điểm liệt để học viên có thể làm quen và ghi nhớ, tránh việc làm sai câu hỏi liệt.</p>
+                        <ul>
+                            <li>Số lượng câu hỏi:&nbsp;<strong>25 câu</strong>.</li>
+                            <li>Yêu cầu làm đúng&nbsp;<strong>23/25 câu</strong>.</li>
+                            <li>Thời gian:&nbsp;<strong>19 phút</strong>.</li>
+                        </ul>
+                        <p><strong>Lưu ý đặc biệt:</strong>&nbsp;uyệt đối không được làm sai câu hỏi điểm liệt, vì trong kỳ thi thật nếu học viên làm sai "
+                            <strong>Câu Điểm Liệt</strong>" đồng nghĩa với việc "<strong>KHÔNG ĐẠT</strong>" 
+                            dù cho các câu khác trả lời đúng!</p>
+                        <div class="text-center">
+                            <button class="btn btn-success btn-success-1 test" type="button">Thi thử­ A2</button>
+                        </div>
+                        <div class="">
+                            <c:forEach var="but" begin="1" end="18" >
+                                <button class="btn btn-success test" type="button">Đề ${but}</button>
+                            </c:forEach>
+                        </div>
+                    </div>
                 </div>
-            </header>
+
+            </div>
+
+        </main>
 
 
-            <main>
-                <div class="container">
-                    
+
+        <footer>
+            <div class="container">
+                <div class="footer-basic panel">
+                    <!-- Start: Links -->
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="#">Home</a></li>
+                        <li class="list-inline-item"><a href="#">Services</a></li>
+                        <li class="list-inline-item"><a href="#">About</a></li>
+                        <li class="list-inline-item"><a href="#">Terms</a></li>
+                        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                    </ul><!-- End: Links -->
+                    <!-- Start: Copyright -->
+                    <p class="copyright">FPT University© 2021</p><!-- End: Copyright -->
                 </div>
-            </main>
+            </div>
+        </footer>
+    </body>
 
-            <footer>
-                <div class="container">
-                    <a href="#">Học bằng lái xe ô tô - Thi bằng lái xe mô tô</a>
-                    <p>Địa chỉ đăng kí học & thi bằng lái xe máy A1 <strong>525C Tô Hiến Thành , Phường 14, Quận 10, TPHCM.</strong></p>
-                </div>
-            </footer>
-        </body>
-
-        </html>
+</html>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

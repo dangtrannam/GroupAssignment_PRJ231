@@ -53,13 +53,12 @@
                   <strong style="font-size: 12pt; color: blue;">Câu hỏi | Đề số 01 - 200 câu hỏi thi A1</strong>
                 </div>
                 <div id="questionList">
-                  <label class="btn btn-success btn-cauhoi clickcauhoi btn-1 active" id="ques1">
-                    <input type="radio" id="1">1
-
-                  </label>
-                  <label class="btn btn-success btn-cauhoi clickcauhoi btn-2" id="ques2">
-                    <input type="radio" id="2">2
-                  </label>
+                  <input class="btn btn-success btn-cauhoi clickcauhoi btn-1 active" data-id="1" id="ques1">
+                  1
+                  </input>
+                  <input class="btn btn-success btn-cauhoi clickcauhoi btn-2" data-id="2" id="ques2">
+                  2
+                  </input>
                 </div>
 
 
@@ -73,7 +72,7 @@
             <div class="panel panel-default" id="blockD">
               <div class="panel-body">
                 <div>
-                  <div class="row d-block ndcauhoi" id="data1">
+                  <div class="row d-block ndcauhoi" id="1">
                     <div class="row">
                       <div class="col-md-12 text-primary">
                         <strong>Câu hỏi 1:</strong>
@@ -106,12 +105,13 @@
                         </div>
                       </div>
                     </div>
+
                     <div class="row">
 
                     </div>
                   </div>
 
-                  <div class="row d-none ndcauhoi" id="data2">
+                  <div class="row d-none ndcauhoi" id="2">
                     <div class="row">
                       <div class="col-md-12 text-primary">
                         <strong>Câu hỏi 1:</strong>
@@ -196,15 +196,20 @@
 
 
 <script>
-  let questions = $('.clickcauhoi');
-  console.log(questions);
+  $(document).ready(function () {
 
-  let viewQuestion = (id) => {
-    // let index = this.id.slice(-1);
-    console.log(id);
-  };
+    $(".clickcauhoi").click(function () {
+      let dataId = $(this).attr("data-id");
+      console.log(dataId);
+      $("#" + dataId - 1).removeClass("active");
+      $("#" + dataId - 1).removeClass("d-block");
+      $("#" + dataId - 1).addClass("d-none");
 
-  let questionList = $("#questionList");
-  let data = $("<div />")
-  questionList.append()
+      $("#" + dataId).addClass("active");
+      $("#" + dataId).removeClass("d-none");
+      $("#" + dataId).addClass("d-block");
+
+    });
+
+  });
 </script>

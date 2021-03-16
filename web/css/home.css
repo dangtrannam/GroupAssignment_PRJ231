@@ -1,9 +1,15 @@
-button.login {
-  margin-left: 11px;
+nav.relative{
+    position: relative;
+}
+
+
+a.login, a.logout {
+  position: absolute;
+  right: 0px;
 }
 
 .main {
-  padding: 10px;
+  padding: 30px;
 }
 
 .test {

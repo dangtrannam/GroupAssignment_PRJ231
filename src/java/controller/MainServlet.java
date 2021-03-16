@@ -25,35 +25,46 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "MainServlet", urlPatterns = {"/MainServlet"})
 public class MainServlet extends HttpServlet {
 
+    private static final String ERROR = "error.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
 
+        String url = ERROR;
+
         String action = request.getParameter("action");
-        String login = "login&register.jsp";
-        String main = "MainServlet";
-        String home = "home.jsp";
-        String loginServlet="Login";
+//        String login = "login&register.jsp";
+//        
+//        String main = "MainServlet";
+        String homepage = "home.jsp";
+
+        String loginServlet = "LoginController";
+        
+        //default page is homepage;
         if (action == null) {
-            action = "Login";
+            url = homepage;
         }
         ArrayList<String> loginActions = new ArrayList<String>();
         loginActions.add("Login");
         loginActions.add("Register");
         loginActions.add("handleLogin");
         loginActions.add("handleRegister");
-        
+        loginActions.add("Logout");
+
         try {
             if (loginActions.contains(action)) {
                 request.setAttribute("action", action);
-                RequestDispatcher rd = request.getRequestDispatcher(loginServlet);
-                rd.include(request, response);
+                url = loginServlet;
             }
             
-
+            
         } catch (Exception e) {
-            e.printStackTrace();
+            log("Error at Main Controller: "+e.getMessage());
+        } finally {
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.include(request, response);
         }
     }
 
