@@ -22,7 +22,7 @@ public class QuizDAO {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT ID FROM Quiz WHERE Type=?";
+        String sql = "SELECT QuizID FROM Quiz WHERE QuizType=?";
 
         ArrayList<String> list = new ArrayList();
         try {
@@ -32,7 +32,7 @@ public class QuizDAO {
                 pstm.setString(1, type);
                 rs = pstm.executeQuery();
                 while (rs.next()) {
-                    list.add(rs.getString("ID"));
+                    list.add(rs.getString("QuizID"));
                 }
             }
         } finally {
@@ -63,11 +63,11 @@ public class QuizDAO {
                 pstm.setString(1, QuizID);
                 rs = pstm.executeQuery();
                 while (rs.next()) {
-                    list.add(new Question(rs.getString("ID"),
+                    list.add(new Question(rs.getString("QuestionID"),
                             rs.getString("QuizID"),
-                            rs.getString("Content"),
-                            rs.getString("url"),
-                            getAnswersbyQuestionID(rs.getString("ID"))));
+                            rs.getString("Question"),
+                            rs.getString("ImageUrl"),
+                            getAnswersbyQuestionID(rs.getString("QuestionID"))));
                 }
             }
         } finally {
@@ -99,7 +99,7 @@ public class QuizDAO {
                 rs = pstm.executeQuery();
                 while (rs.next()) {
                     list.add(new Answer(rs.getString("QuestionID"),
-                            rs.getString("Content"),
+                            rs.getString("Answer"),
                             rs.getString("isCorrect")));
                 }
             }

@@ -16,8 +16,8 @@ public class DBUtils {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             
             //2. Tao object ket noi CSDL gom 3 param: url, username, pwd
-            String url = "jdbc:sqlserver://192.168.165.2:1433;databaseName=GroupAssignment_PRJ";
-            Connection con = DriverManager.getConnection(url, "sa", "123123");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=GroupAssignment_PRJ";
+            Connection con = DriverManager.getConnection(url, "abc", "123");
             return con;
         } catch (ClassNotFoundException e) {
             // TODO: handle exception

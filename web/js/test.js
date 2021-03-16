@@ -33,10 +33,10 @@ $(document).ready(function () {
             $(this).hide();
     });
 
-    $("#next").click(function(){}
+    $("#next").click(function(){})
         
 
-    $("#prev").click(function(){}
+    $("#prev").click(function(){})
         
 
 });

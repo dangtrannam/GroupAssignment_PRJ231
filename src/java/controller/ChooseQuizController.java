@@ -5,72 +5,45 @@
  */
 package controller;
 
-import daos.AccountDAO;
-import dtos.Account;
+import daos.QuizDAO;
+import dtos.Quiz;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author macbookpro2018
+ * @author OS
  */
-@WebServlet(name = "MainServlet", urlPatterns = {"/MainServlet"})
-public class MainServlet extends HttpServlet {
-
-    private static final String ERROR = "error.jsp";
+public class ChooseQuizController extends HttpServlet { private static final String ERROR = "error.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+            throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-
+        response.setContentType("text/html;charset=UTF-8");
+        System.out.println("asdasdasd");
+        String quiz = (String) request.getParameter("QuizID");
+        System.out.println(quiz);
         String url = ERROR;
-
-        String action = request.getParameter("action");
-//        String login = "login&register.jsp";
-//        
-//        String main = "MainServlet";
-        String homepage = "home.jsp";
-
-        String loginServlet = "LoginController";
-
-        //default page is homepage;
-        if (action == null) {
-            url = homepage;
-        }
-
-        ArrayList<String> loginActions = new ArrayList<String>();
-        loginActions.add("Login");
-        loginActions.add("Register");
-        loginActions.add("handleLogin");
-        loginActions.add("handleRegister");
-        loginActions.add("Logout");
-
         try {
-            if (loginActions.contains(action)) {
-                request.setAttribute("action", action);
-                url = loginServlet;
-            } else if (action.equals("viewQuiz")) {
-                
-                url = "ViewQuizController";
-            } else if (action.equals("ChooseQuiz")) 
-            {
-                url="ChooseQuizController";
-            }
-
-        } catch (Exception e) {
-            log("Error at Main Controller: " + e.getMessage());
+            QuizDAO dao = new QuizDAO();
+            Quiz Quiz=dao.getQuizbyQuizID(quiz);
+            request.setAttribute("Quiz", Quiz);
+            request.setAttribute("QuizType", request.getParameter("Type"));
+            System.out.println(request.getParameter("Type"));
+            url="test.jsp";
+        } catch (SQLException | NamingException e) {
+            log("Error at viewQuizController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
-         
         }
     }
 
@@ -86,7 +59,13 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    try {
         processRequest(request, response);
+    } catch (NamingException ex) {
+        Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**
@@ -100,7 +79,13 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    try {
         processRequest(request, response);
+    } catch (NamingException ex) {
+        Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(ChooseQuizController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**

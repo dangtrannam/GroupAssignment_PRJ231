@@ -19,17 +19,17 @@
                 <!-- Start: Navigation with Search -->
                 <nav role="navigation"
                      class="navbar navbar-dark navbar-expand-md bg-success border rounded navigation-clean-search relative">
-                    <div class="container"><a class="navbar-brand active homepage" href="#">Trang chủ</a>
+                    <div class="container"><a class="navbar-brand homepage" href="MainServlet?action=viewQuiz&quiz=A1">Trang chủ</a>
                         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navcol-1">
                             <ul class="nav navbar-nav">
-                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­ A1</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ A2</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ B1</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ B2</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=A1">Thi thử­ A1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=A2">Thi thử­­ A2</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=B1">Thi thử­­ B1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=B2">Thi thử­­ B2</a></li>
 
                             </ul>
 
@@ -62,24 +62,33 @@
             <div class="row">
                 <div class="container">
                     <div class="panel main">
-                        <h3 class="text-center text-primary">BỘ ĐỀ THI THỬ BẰNG LÁI XE MÁY A1 CHÍNH THỨC TỪ 01/08/2020</h3>
-                        <p>Cấu trúc bộ đề thi sát hạch giấy phép lái xe hạng A1 sẽ bao gồm 25 câu hỏi, mỗi câu hỏi chỉ có duy nhất 
-                            1 đáp trả lời đúng phản ánh đúng bản chất của thi trắc nghiệm. Khác hẳn với bộ đề thi luật cũ là 2 đáp án. Mỗi đề thi chúng tôi sẽ bố trí từ 2 - 4 
-                            câu hỏi điểm liệt để học viên có thể làm quen và ghi nhớ, tránh việc làm sai câu hỏi liệt.</p>
-                        <ul>
-                            <li>Số lượng câu hỏi:&nbsp;<strong>25 câu</strong>.</li>
-                            <li>Yêu cầu làm đúng&nbsp;<strong>23/25 câu</strong>.</li>
-                            <li>Thời gian:&nbsp;<strong>19 phút</strong>.</li>
-                        </ul>
-                        <p><strong>Lưu ý đặc biệt:</strong>&nbsp;uyệt đối không được làm sai câu hỏi điểm liệt, vì trong kỳ thi thật nếu học viên làm sai "
-                            <strong>Câu Điểm Liệt</strong>" đồng nghĩa với việc "<strong>KHÔNG ĐẠT</strong>" 
-                            dù cho các câu khác trả lời đúng!</p>
+                        <c:choose>
+                            <c:when test="${quiz=='A1'}">
+                                <h3 class="text-center text-primary">BỘ ĐỀ THI THỬ BẰNG LÁI XE MÁY A1 CHÍNH THỨC TỪ 01/08/2020</h3>
+                                <p>Cấu trúc bộ đề thi sát hạch giấy phép lái xe hạng A1 sẽ bao gồm 25 câu hỏi, mỗi câu hỏi chỉ có duy nhất 
+                                    1 đáp trả lời đúng phản ánh đúng bản chất của thi trắc nghiệm. Khác hẳn với bộ đề thi luật cũ là 2 đáp án. Mỗi đề thi chúng tôi sẽ bố trí từ 2 - 4 
+                                    câu hỏi điểm liệt để học viên có thể làm quen và ghi nhớ, tránh việc làm sai câu hỏi liệt.</p>
+                                <ul>
+                                    <li>Số lượng câu hỏi:&nbsp;<strong>25 câu</strong>.</li>
+                                    <li>Yêu cầu làm đúng&nbsp;<strong>23/25 câu</strong>.</li>
+                                    <li>Thời gian:&nbsp;<strong>19 phút</strong>.</li>
+                                </ul>
+                                <p><strong>Lưu ý đặc biệt:</strong>&nbsp;uyệt đối không được làm sai câu hỏi điểm liệt, vì trong kỳ thi thật nếu học viên làm sai "
+                                    <strong>Câu Điểm Liệt</strong>" đồng nghĩa với việc "<strong>KHÔNG ĐẠT</strong>" 
+                                    dù cho các câu khác trả lời đúng!</p>
+                                </c:when>
+                            </c:choose>
+
                         <div class="text-center">
-                            <button class="btn btn-success btn-success-1 test" type="button">Thi thử­ A2</button>
+                            <button class="btn btn-success btn-success-1 test" type="button">Thi thử­ ${requestScope.quiz}</button>
                         </div>
                         <div class="">
-                            <c:forEach var="but" begin="1" end="18" >
-                                <button class="btn btn-success test" type="button">Đề ${but}</button>
+                            <c:set var="list" value="${requestScope.listID}"></c:set>
+                            <c:forEach items="${list}" var="id">
+
+                                <a class="btn btn-success test"
+                                   href="MainServlet?action=ChooseQuiz&QuizID=${id}&Type=${requestScope.quiz}"> Đề ${id}</a>
+
                             </c:forEach>
                         </div>
                     </div>
