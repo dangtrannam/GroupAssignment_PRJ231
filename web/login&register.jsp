@@ -6,13 +6,6 @@
 <html>
 
     <head>
-        <% String action = (String) request.getAttribute("action");
-            String msg = (String) request.getAttribute("msg");
-            if (msg == null) {
-                msg = "";
-            }
-            if (action == null)
-                action = "Login";%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>
             ${action} page
@@ -27,14 +20,18 @@
         <div class="container login-container">
             <div class="row">
                 <div class="offset-md-4 col-md-4 login-form-1">
+                    <c:if test="${requestScope.action==null}">
+                        <c:set var="action" value="Login"/>
+                    </c:if>
+
                     <h3>
-                        ${requestScope.action} page
+                        ${action} page
                     </h3>
                     <br>
                     <form action="MainServlet" method="post" name="flogin">
 
-                        <span class="message">${msg}</span>
-                        <input type="hidden" name="action" value="handle${requestScope.action}"/>
+                        <span class="message">${requestScope.msg}</span>
+                        <input type="hidden" name="action" value="handle${action}"/>
 
                         <div class="form-group">
                             <input class="form-control" type="text" placeholder="Username" name="uname" required/>
@@ -44,28 +41,31 @@
                             <input class="form-control" type="password" placeholder="Password" name="psw" required/>
                         </div>
 
-                        <% if (action.equals("Register")) { %>
-                        <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Re-password" name="re-psw" required/>
-                        </div>
+                        <c:choose>
+                            <c:when test="${action}=='Register'">
+                                <div class="form-group">
+                                    <input class="form-control" type="password" placeholder="Re-password" name="re-psw" required/>
+                                </div>
 
-                        <div class="form-group">
-                            <input class="btnSubmit" type="submit" value="Register"/>
-                        </div>
+                                <div class="form-group">
+                                    <input class="btnSubmit" type="submit" value="Register"/>
+                                </div>
 
-                        <div class="form-group">
-                            <a class="ForgetPwd" href="MainServlet?action=Login">Already have an account?</a>
-                        </div>
+                                <div class="form-group">
+                                    <a class="ForgetPwd" href="MainServlet?action=Login">Already have an account?</a>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="form-group">
+                                    <input type="submit" class="btnSubmit" value="Login" />
+                                </div>
 
-                        <% } else { %>
-                        <div class="form-group">
-                            <input type="submit" class="btnSubmit" value="Login" />
-                        </div>
+                                <div class="form-group">
+                                    <a class="ForgetPwd" href="MainServlet?action=Register">Don't have an account?</a>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
 
-                        <div class="form-group">
-                            <a class="ForgetPwd" href="MainServlet?action=Register">Don't have an account?</a>
-                        </div>
-                        <% }%>
                     </form>
 
                 </div>

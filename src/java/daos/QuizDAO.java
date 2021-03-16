@@ -1,7 +1,6 @@
 package daos;
 
 import dbhelper.DBUtils;
-import dtos.Account;
 import dtos.Answer;
 import dtos.Question;
 import dtos.Quiz;

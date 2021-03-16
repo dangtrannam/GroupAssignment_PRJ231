@@ -19,7 +19,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,6 +27,7 @@ import javax.servlet.http.HttpSession;
 public class ViewQuizController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "home.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, SQLException {
@@ -43,8 +43,9 @@ public class ViewQuizController extends HttpServlet {
             request.setAttribute("listID", listID);
             request.setAttribute("quiz", quiz);
             System.out.println(listID.size());
-            
-            url="home.jsp";
+
+            url = SUCCESS;
+
         } catch (SQLException | NamingException e) {
             log("Error at viewQuizController: " + e.getMessage());
         } finally {

@@ -4,15 +4,21 @@
  * and open the template in the editor.
  */
 
+function showQuestion(index)
+{
+    console.log(index);
 
+}
 $(document).ready(function () {
 
+    let id = 1;
     //interact with questionList buttons
     $("#show1").addClass("active");
     $("#cauhoi1").addClass("d-block");
     $(".clickcauhoi").click(function () {
 
         let ID = $(this).attr("id").trim().slice(4);//skip "cauhoi"
+        id = ID;
         for (let i = 1; i <= 25; i++) {
             //active questionButton
             $("#show" + i).removeClass("active");
@@ -34,22 +40,36 @@ $(document).ready(function () {
 //            $(this).hide();
 //    });
 //
-//    $("#next").click(function () {})
+    $("#next").click(function () {
+        $("#cauhoi" + id).removeClass("d-block");
+        $("#cauhoi" + id).addClass("d-none");
+        $("#show" + id).removeClass("active");
+        id = id % 25 + 1;
+        $("#cauhoi" + id).addClass("d-block");
+        $("#cauhoi" + id).removeClass("d-none");
+        $("#show" + id).addClass("active");
+    })
 //
 //
-//    $("#prev").click(function () {})
+    $("#prev").click(function () {
+        $("#cauhoi" + id).removeClass("d-block");
+        $("#cauhoi" + id).addClass("d-none");
+        $("#show" + id).removeClass("active");
+        id--;
+        if (id == 0)
+            id = 25;
+        $("#cauhoi" + id).addClass("d-block");
+        $("#cauhoi" + id).removeClass("d-none");
+        $("#show" + id).addClass("active");
+    })
 
 
 //<<<<<<< HEAD
-    $("#next").click(function(){})
-        
+    $("#next").click(function () {})
 
-    $("#prev").click(function(){})
-        
-//=======
 
-    //timer
-//>>>>>>> 68d24e3549edec486f7d574e0068c7d7e62995e8
+    $("#prev").click(function () {})
+
 
     var seconds = 1140;
     function timer() {
@@ -73,5 +93,5 @@ $(document).ready(function () {
         }
     }
     var countdownTimer = setInterval('timer()', 1000);//chỗ này là số 1000 là đúng.
-    
+
 });

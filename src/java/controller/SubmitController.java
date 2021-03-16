@@ -10,7 +10,6 @@ import dtos.Answer;
 import dtos.Question;
 import dtos.Quiz;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -28,38 +27,53 @@ import javax.servlet.http.HttpServletResponse;
 public class SubmitController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "test.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
+
         String QuizID = (String) request.getParameter("QuizID");
+
         String url = ERROR;
-        System.out.println("abc");
+
+        System.out.println("...In SubmitController...");
         try {
             QuizDAO dao = new QuizDAO();
             Quiz quiz = dao.getQuizbyQuizID(QuizID);
             ArrayList<Question> questions = quiz.getList();
-            ArrayList<Integer> chosenAns=new ArrayList<>();
-            
+            ArrayList<Integer> chosenAns = new ArrayList<>();
+            ArrayList<String> results=new ArrayList<>();
             int grade = 0;
             int i;
             for (i = 0; i < questions.size(); i++) {
-                String x = (String) request.getParameter(String.valueOf(i));
+                String x = (String) request.getParameter(String.valueOf(i));              
                 if (x != null) {
                     
                     Question q = questions.get(i);
                     Answer ans = q.getListAnswer().get(Integer.parseInt(x));
                     if (ans != null && ans.getIsCorrect().trim().equals("true")) {
                         grade++;
-                    }
+                        results.add("bg-success");
+                    } else results.add("bg-danger");
                     chosenAns.add(Integer.parseInt(x));
-                } else chosenAns.add(-1);
+                } else {
+                    chosenAns.add(-1);
+                    results.add("bg-secondary");
+                }
             }
+            
             request.setAttribute("grade", grade);
             request.setAttribute("ChosenAns", chosenAns);
             request.setAttribute("Quiz", quiz);
-            url = "test.jsp";
+            request.setAttribute("results", results);
+            
+            for (int j=0; j < chosenAns.size(); j++) {
+                System.out.println("choAns" +j+":"+chosenAns.get(j) +" - ");
+            }
+            
+            url = SUCCESS;
+
         } catch (SQLException | NamingException e) {
             log("Error at ChooseQuizController: " + e.getMessage());
         } finally {
@@ -81,9 +95,7 @@ public class SubmitController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (NamingException ex) {
-            Logger.getLogger(SubmitController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (NamingException | SQLException ex) {
             Logger.getLogger(SubmitController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -101,9 +113,7 @@ public class SubmitController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (NamingException ex) {
-            Logger.getLogger(SubmitController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (NamingException | SQLException ex) {
             Logger.getLogger(SubmitController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
