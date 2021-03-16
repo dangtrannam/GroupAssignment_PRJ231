@@ -66,6 +66,8 @@ public class MainServlet extends HttpServlet {
             } else if (action.equals("ChooseQuiz")) 
             {
                 url="ChooseQuizController";
+            } else if (action.equals("Submit")) {
+                url="SubmitController";
             }
 
         } catch (Exception e) {

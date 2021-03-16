@@ -8,6 +8,10 @@
         <servlet-name>ChooseQuizController</servlet-name>
         <servlet-class>controller.ChooseQuizController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubmitController</servlet-name>
+        <servlet-class>controller.SubmitController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>viewQuiz</servlet-name>
         <url-pattern>/ViewQuizController</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ChooseQuizController</servlet-name>
         <url-pattern>/ChooseQuizController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitController</servlet-name>
+        <url-pattern>/SubmitController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

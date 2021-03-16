@@ -20,36 +20,34 @@
                 <!-- Start: Navigation with Search -->
                 <nav role="navigation"
                      class="navbar navbar-dark navbar-expand-md bg-success border rounded navigation-clean-search relative">
-                    <div class="container"><a class="navbar-brand homepage" href="#">Trang chủ</a>
+                    <div class="container"><a class="navbar-brand homepage" href="MainServlet?action=viewQuiz&quiz=A1">Trang chủ</a>
                         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navcol-1">
                             <ul class="nav navbar-nav">
-                                <li class="nav-item active"><a class="nav-link" href="#">Thi thử­ A1</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ A2</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ B1</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Thi thử­­ B2</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=A1">Thi thử­ A1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=A2">Thi thử­­ A2</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=B1">Thi thử­­ B1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=B2">Thi thử­­ B2</a></li>
 
                             </ul>
 
                             <div>
-                               
                                 <c:choose >
                                     <c:when  test="${not empty sessionScope.user.userName}">
-                                        <!--TODO: ViewProfile-->
                                         <c:url value="MainServlet?action=ViewProfile" var ="profileLink"></c:url>
                                         <a  href="${profileLink}" class="btn  btn-sm login " >Welcome <c:out value = "${sessionScope.user.userName}" /></a>
                                     </c:when>
                                     <c:otherwise>
                                         <c:url value="MainServlet?action=Login" var ="LoginLink"></c:url>
-                                        <a  href="${LoginLink}" class="btn btn-sm login " >Đăng nhập</a>
+                                        <a  href="${LoginLink}" class="btn  btn-sm login " >Đăng nhập</a>
                                     </c:otherwise>
                                 </c:choose>
 
                                 <c:url value="MainServlet?action=Logout" var="LogoutLink"></c:url>
-                                <a href="${LogoutLink}" class="btn  btn-sm logout ">Đăng xuất</a>
+                                <a href="${LogoutLink}" class="btn btn-sm logout ">Đăng xuất</a>
                             </div>
 
                         </div>
@@ -63,7 +61,7 @@
 
         <main>
             <div class="container">
-                <form action="" name="f-doquiz" method="post">
+                <form action="MainServlet?action=Submit" name="f-doquiz" method="post">
                     <div class="row">
 
                         <div class="col-md-4">
@@ -84,49 +82,48 @@
                             </div>
                             <div id="blockB" class="panel panel-default">
                                 <strong style="font-size:12pt; color:blue"> Thời gian còn lại:  <span id="countdown" class="timer"></span></strong>
-                                
+
                             </div>
                             <div id="blockC" class="panel panel-default">
                                 <div>
                                     <input type="submit" name="nopbai" id="nopbai" value="Nộp bài">
                                 </div>
                             </div>
-                            
+
                         </div>
 
                         <div class="col-md-8">
                             <div class="panel panel-default" id="blockD">
                                 <div class="panel-body">
                                     <div>
-
-                                        <c:forEach var="i" begin="1" end="25" >
-                                            <div class="row d-none ndcauhoi" id="cauhoi${i}">
+                                        <c:set var="questions" value="${Quiz.getList()}"></c:set>
+                                        <input type="hidden" name="QuizID" value="${Quiz.getList().get(0).getQuizID()}">
+                                        <c:set var="i" value="0"/>
+                                        
+                                        
+                                        <c:forEach items="${questions}" var="question">
+                                            <c:set var="i" value="${i+1}"/>
+                                            <div class="row d-none ndcauhoi" id="cauhoi${i}"/>
                                                 <div class="row">
                                                     <div class="col-md-12 text-primary">
                                                         <strong>Câu hỏi ${i}:</strong>
                                                     </div>
 
                                                     <div class="col-12" style="text-align: justify;">
-                                                        <strong>PPhần của đường bộ được sử dụng cho các phương tiện giao thông qua lại là gì ?</strong>
+                                                        <strong>${question.getContent()}</strong>
                                                     </div>
                                                     <img class="col-12 img-responsive" src="" alt="">
-
+                                                    <c:set var="answers" value="${question.getListAnswer()}"></c:set>
                                                     <div class="col-md-12">
+                                                        <c:set var="j" value="0"/>
+                                                    <c:forEach items="${answers}" var="answer">
                                                         <div class="cautraloi">
                                                             <label class="checkbox-inline">
-                                                                <input type="radio" class="answer" name="1[]" value="Pháº§n máº·t ÄÆ°á»ng vÃ  lá» ÄÆ°á»ng"> 1- Phần mặt đường và lề đường.
+                                                                <input type="radio" class="answer" name="${i-1}" value="${j}">${answer.getContent()}
                                                             </label>
                                                         </div>
-                                                        <div class="cautraloi">
-                                                            <label class="checkbox-inline">
-                                                                <input type="radio" class="answer" name="1[]" value="Pháº§n máº·t ÄÆ°á»ng vÃ  lá» ÄÆ°á»ng"> 2- Phần đường xe chạy.
-                                                            </label>
-                                                        </div>
-                                                        <div class="cautraloi">
-                                                            <label class="checkbox-inline">
-                                                                <input type="radio" class="answer" name="1[]" value="Pháº§n máº·t ÄÆ°á»ng vÃ  lá» ÄÆ°á»ng"> 3- Phần đường xe cơ giới.
-                                                            </label>
-                                                        </div>
+                                                            <c:set var="j" value="${j+1}"/>
+                                                    </c:forEach>
                                                     </div>
                                                 </div>
 

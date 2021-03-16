@@ -39,6 +39,7 @@ public class ChooseQuizController extends HttpServlet { private static final Str
             request.setAttribute("Quiz", Quiz);
             request.setAttribute("QuizType", request.getParameter("Type"));
             System.out.println(request.getParameter("Type"));
+            
             url="test.jsp";
         } catch (SQLException | NamingException e) {
             log("Error at viewQuizController: " + e.getMessage());

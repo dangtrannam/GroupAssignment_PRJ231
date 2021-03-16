@@ -40,16 +40,16 @@ $(document).ready(function () {
 //    $("#prev").click(function () {})
 
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
     $("#next").click(function(){})
         
 
     $("#prev").click(function(){})
         
-=======
+//=======
 
     //timer
->>>>>>> 68d24e3549edec486f7d574e0068c7d7e62995e8
+//>>>>>>> 68d24e3549edec486f7d574e0068c7d7e62995e8
 
     var seconds = 1140;
     function timer() {
