@@ -16,3 +16,7 @@ nbdist/
 src/java/dbhelper/DBUtils.java
 *.class
 src/java/dbhelper/DBUtils.java
+*.class
+src/java/dbhelper/DBUtils.java
+*.properties
+*.properties

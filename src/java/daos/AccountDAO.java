@@ -70,9 +70,26 @@ public class AccountDAO {
                 pstm.executeUpdate();
                 return true;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
+            closeConnection();
+        }
+        return false;
+    }
+    
+    public boolean changePassword(Account acc) throws Exception{
+        String sql = "Update Account Set Password=? Where UserName=?";
+        try{
+            con = DBUtils.makeConnection();
+            if(con != null){
+                pstm = con.prepareStatement(sql);
+                pstm.setString(1, acc.getPassword());
+                pstm.setString(2, acc.getUserName());
+                
+                if (pstm.executeUpdate() > 0) {
+                    return true;
+                }
+            }
+        }finally{
             closeConnection();
         }
         return false;

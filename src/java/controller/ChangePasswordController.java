@@ -8,9 +8,6 @@ package controller;
 import daos.AccountDAO;
 import dtos.Account;
 import java.io.IOException;
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,62 +19,54 @@ import javax.servlet.http.HttpSession;
  *
  * @author macbookpro2018
  */
-@WebServlet(name = "MainServlet", urlPatterns = {"/MainServlet"})
-public class MainServlet extends HttpServlet {
+@WebServlet(name = "ChangePasswordController", urlPatterns = {"/ChangePasswordController"})
+public class ChangePasswordController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
+    private static String ERROR = "error.jsp";
+    private static String SUCCESS = "profile.jsp";
+    private static String INVALID = "login&register.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
-
         String url = ERROR;
-
-        String action = request.getParameter("action");
-//        String login = "login&register.jsp";
-//        
-//        String main = "MainServlet";
-        String homepage = "home.jsp";
-
-        String loginServlet = "LoginController";
-
-        //default page is homepage;
-        if (action == null) {
-            action = "Login";
-            url = homepage;
-        }
-
-        ArrayList<String> loginActions = new ArrayList<String>();
-        loginActions.add("Login");
-        loginActions.add("Register");
-        loginActions.add("handleLogin");
-        loginActions.add("handleRegister");
-        loginActions.add("Logout");
-
         try {
 
-            if (loginActions.contains(action)) {
-                request.setAttribute("action", action);
-                url = loginServlet;
-            } else if (action.equals("viewQuiz")) {
+            HttpSession session = request.getSession(false);
+            Account user = (Account) session.getAttribute("user");
+            if (user != null) {
+                String confirm = request.getParameter("confirm") == null ? "" : request.getParameter("confirm");
+                if (confirm.equals("confirm")) {
+                    
+                    String password = (String) request.getParameter("Password");
+                    String repassword = (String) request.getParameter("re-Password");
+                    System.out.println(password);
+                    
+                    if(password.equals(repassword)){
+                        AccountDAO accDao = new AccountDAO();
+                        boolean check = accDao.changePassword(new Account( user.getUserName(),password,user.getRole() ));
+                        if (check) {
+                            url = "home.jsp";
+                        }
+                    }else{
+                        request.setAttribute("ERROR", "");
+                        url = "profile.jsp";
+                    }
+                    
+                } else {
+                    request.setAttribute("state", "changePassword");
+                    url = SUCCESS;
+                }
 
-                url = "ViewQuizController";
-            } else if (action.equals("ChooseQuiz")) {
-                url = "ChooseQuizController";
-            } else if (action.equals("Submit")) {
-                url = "SubmitController";
-            } else if (action.equals("ViewProfileController")) {
-               url = "ViewProfileController";
-            }else if(action.equals("ChangePasswordController")){
-                url = "ChangePasswordController";
+            } else {
+                request.setAttribute("INVALID", "<p class='text-danger'>You don't have permission to use this function!</p>");
+                url = INVALID;
             }
 
         } catch (Exception e) {
-            log("Error at Main Controller: " + e.getMessage());
+            log("Error at ChangePassword Controller" + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
-
         }
     }
 

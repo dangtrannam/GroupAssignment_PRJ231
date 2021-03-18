@@ -23,11 +23,10 @@
                     <c:if test="${requestScope.action==null}">
                         <c:set var="action" value="Login"/>
                     </c:if>
-
+                    ${requestScope.INVALID}
                     <h3>
                         ${action} page
                     </h3>
-                    <br>
                     <form action="MainServlet" method="post" name="flogin">
 
                         <span class="message">${requestScope.msg}</span>
@@ -42,7 +41,7 @@
                         </div>
 
                         <c:choose>
-                            <c:when test="${action}=='Register'">
+                            <c:when test="${action=='Register'}">
                                 <div class="form-group">
                                     <input class="form-control" type="password" placeholder="Re-password" name="re-psw" required/>
                                 </div>

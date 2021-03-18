@@ -36,7 +36,7 @@
                             <div>
                                 <c:choose >
                                     <c:when  test="${not empty sessionScope.user.userName}">
-                                        <c:url value="MainServlet?action=ViewProfile" var ="profileLink"></c:url>
+                                        <c:url value="MainServlet?action=ViewProfileController" var ="profileLink"></c:url>
                                         <a  href="${profileLink}" class="btn  btn-sm login " >Welcome <c:out value = "${sessionScope.user.userName}" /></a>
                                     </c:when>
                                     <c:otherwise>

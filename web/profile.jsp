@@ -1,19 +1,20 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%-- 
+    Document   : profile
+    Created on : Mar 18, 2021, 1:51:17 PM
+    Author     : macbookpro2018
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Homepage</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Profile Page</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/home.css">
+        <link rel="stylesheet" href="./css/profile.css" >
     </head>
-
-    <body>
+    <body>  
         <header>
             <div class="container">
                 <!-- Start: Navigation with Search -->
@@ -53,51 +54,75 @@
                     </div>
                 </nav>
                 <h1 class="text-center text-white bg-info">ĐỀ THI THỬ BẰNG LÁI XE A1 200 CÂU HỎI MỚI NHẤT 2020</h1>
-
             </div>
 
         </header>
 
         <main>
-            <div class="row">
-                <div class="container">
-                    <div class="panel main">
+            <div class="container">
+                <div class="profile panel">
+                    <form action="ChangePasswordController" method="POST">
+
+                        <table border="1" cellpadding="10">
+                            <c:set var="readonly" value="readonly" />
+                            <tbody>
+                                <tr>
+                            <div class="form-group">
+                                <td> <label for="UserName">Username: </label> </td>
+                                <td> <input type="text" readonly name="UserName" class="form-control" value="${sessionScope.user.getUserName()}" > </td>
+                            </div>
+
+
+                            </tr>
+                            <tr>
+                                <c:if test="${state=='changePassword'}" var="isChangeState">
+                                    <c:set var="readonly" value="" />
+                                </c:if>
+                            <div class="form-group">
+                                <td> <label for="Password">Password </label> </td>
+                                <td> <input type="text" ${readonly} name="Password" id="Password" class="form-control" value="${sessionScope.user.getPassword()}"> </td>
+                            </div>
+                            </tr>
+
+                            <c:if test="${isChangeState}">
+                                <tr>
+                                <div class="form-group">
+                                    <td> <label for="re-Password">Re-Password </label> </td>
+                                    <td> <input type="text" ${readonly} name="re-Password" id="re-Password" class="form-control" value=""> </td>
+                                </div>
+                                </tr>
+                            </c:if>
+
+
+                            <tr>
+                            <div class="form-group">
+                                <td> <label for="role">Role </label> </td>
+                                <td> <input type="text" id="role" readonly class="form-control" value="${sessionScope.user.getRole()}"> </td>
+                            </div>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
                         <c:choose>
-                            <c:when test="${quiz=='A1'}">
-                                <h3 class="text-center text-primary">BỘ ĐỀ THI THỬ BẰNG LÁI XE MÁY A1 CHÍNH THỨC TỪ 01/08/2020</h3>
-                                <p>Cấu trúc bộ đề thi sát hạch giấy phép lái xe hạng A1 sẽ bao gồm 25 câu hỏi, mỗi câu hỏi chỉ có duy nhất 
-                                    1 đáp trả lời đúng phản ánh đúng bản chất của thi trắc nghiệm. Khác hẳn với bộ đề thi luật cũ là 2 đáp án. Mỗi đề thi chúng tôi sẽ bố trí từ 2 - 4 
-                                    câu hỏi điểm liệt để học viên có thể làm quen và ghi nhớ, tránh việc làm sai câu hỏi liệt.</p>
-                                <ul>
-                                    <li>Số lượng câu hỏi:&nbsp;<strong>25 câu</strong>.</li>
-                                    <li>Yêu cầu làm đúng&nbsp;<strong>23/25 câu</strong>.</li>
-                                    <li>Thời gian:&nbsp;<strong>19 phút</strong>.</li>
-                                </ul>
-                                <p><strong>Lưu ý đặc biệt:</strong>&nbsp;uyệt đối không được làm sai câu hỏi điểm liệt, vì trong kỳ thi thật nếu học viên làm sai "
-                                    <strong>Câu Điểm Liệt</strong>" đồng nghĩa với việc "<strong>KHÔNG ĐẠT</strong>" 
-                                    dù cho các câu khác trả lời đúng!</p>
-                                </c:when>
-                            </c:choose>
+                            <c:when test="${isChangeState}">
+                                <input type="hidden" value="confirm" name="confirm">
+                                <button type="submit" class="btn btn-primary mt-3">Confirm change</button>
+                            </c:when>
+                            <c:otherwise>
+                                <c:url var="changePassword" value="MainServlet?action=ChangePasswordController" />
+                                <a href="${changePassword}" class="btn btn-primary text-white mt-3">Change password</a>
+                            </c:otherwise>
+                        </c:choose>
 
-                        <div class="text-center">
-                            <button class="btn btn-success btn-success-1 test" type="button">Thi thử­ ${requestScope.quiz}</button>
-                        </div>
-                        <div class="">
-                            <c:set var="list" value="${requestScope.listID}"></c:set>
-                            <c:forEach items="${list}" var="id">
 
-                                <a class="btn btn-success test"
-                                   href="MainServlet?action=ChooseQuiz&QuizID=${id}&Type=${requestScope.quiz}"> Đề ${id}</a>
+                    </form>
 
-                            </c:forEach>
-                        </div>
-                    </div>
+                    <c:url var="homepage" value="MainServlet?action=viewQuiz&quiz=A1" />
+                    <a href="${homepage}"> Return to the homepage</a>
                 </div>
-
             </div>
-
         </main>
-
 
 
         <footer>
@@ -117,8 +142,8 @@
             </div>
         </footer>
     </body>
-
 </html>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
