@@ -14,3 +14,5 @@ nbdist/
 
 # End of https://www.toptal.com/developers/gitignore/api/netbeans
 src/java/dbhelper/DBUtils.java
+*.class
+src/java/dbhelper/DBUtils.java
