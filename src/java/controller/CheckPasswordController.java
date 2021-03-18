@@ -8,6 +8,7 @@ package controller;
 import daos.AccountDAO;
 import dtos.Account;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,47 +20,49 @@ import javax.servlet.http.HttpSession;
  *
  * @author macbookpro2018
  */
-@WebServlet(name = "ChangePasswordController", urlPatterns = {"/ChangePasswordController"})
-public class ChangePasswordController extends HttpServlet {
+@WebServlet(name = "CheckPasswordController", urlPatterns = {"/CheckPasswordController"})
+public class CheckPasswordController extends HttpServlet {
 
-    private static String ERROR = "error.jsp";
-    private static String SUCCESS = "profile.jsp";
-    private static String INVALID = "login&register.jsp";
+    private static String ERROR = "error.js";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            String password = request.getParameter("Password") == null ? "" : request.getParameter("Password");
+            String repassword = request.getParameter("re-Password") == null ? "" : request.getParameter("re-Password");
 
-            //Check session first, if there is no user -> return to the login page
-            HttpSession session = request.getSession(false);
-            Account user = (Account) session.getAttribute("user");
-            if (user != null) {
-
-                //if there is confirm action request from the Profile page, check & change the password!
-                String confirm = request.getParameter("confirm") == null ? "" : request.getParameter("confirm");
-                if (confirm.equals("confirm")) {
-
-                    request.setAttribute("Password", request.getParameter("Password"));
-                    request.setAttribute("re-Password", request.getParameter("re-Password"));
+            //If password or re-password is empty -> send back the msg
+            if (password.isEmpty()) {
+                request.setAttribute("emptyPass", "<p class='text-danger'>This should not be empty!</p>");
+                url = "profile.jsp";
+                request.setAttribute("state", "changePassword");
+            }
+            if (repassword.isEmpty()) {
+                request.setAttribute("emptyRePass", "<p class='text-danger'>This should not be empty!</p>");
+                url = "profile.jsp";
+                request.setAttribute("state", "changePassword");
+                
+            } else {
+                if (password.equals(repassword)) {
+                    AccountDAO accDao = new AccountDAO();
                     
-                    session.setAttribute("user", user);
-                    url = "CheckPasswordController";
-
+                    Account user = (Account) request.getSession(false).getAttribute("user");
+                    boolean check = accDao.changePassword(new Account(user.getUserName(), password, user.getRole()));
+                    if (check) {
+                        url = "home.jsp";
+                    }
                 } else {
-                    request.setAttribute("state", "changePassword");
-                    url = SUCCESS;
+                    request.setAttribute("ERROR", "");
+                    url = "profile.jsp";
                 }
-
-            } else {//View profile
-                request.setAttribute("INVALID", "<p class='text-danger'>You don't have permission to use this function!</p>");
-                url = INVALID;
             }
 
-        } catch (Exception e) {
-            log("Error at ChangePassword Controller" + e.getMessage());
-        } finally {
+        }catch(Exception e){
+            log("Error at Check password Controller: "+e.getMessage());
+        }
+        finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

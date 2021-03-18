@@ -16,8 +16,8 @@ public class DBUtils {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             
             //2. Tao object ket noi CSDL gom 3 param: url, username, pwd
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=GroupAssignment_PRJ";
-            Connection con = DriverManager.getConnection(url, "sa", "1234567890");
+            String url = "jdbc:sqlserver://192.168.165.2:1433;databaseName=GroupAssignment_PRJ";
+            Connection con = DriverManager.getConnection(url, "sa", "123123");
             return con;
         } catch (ClassNotFoundException e) {
             // TODO: handle exception
@@ -29,13 +29,13 @@ public class DBUtils {
         return null;
     }
     
-    public static Connection getConnection() throws Exception{
-        Context context = new InitialContext();
-        Context end = (Context) context.lookup("java:comp/env");
-        DataSource ds = (DataSource) end.lookup("DBConnection");
-        Connection conn = ds.getConnection();
-        return conn;
-    }
+//    public static Connection getConnection() throws Exception{
+//        Context context = new InitialContext();
+//        Context end = (Context) context.lookup("java:comp/env");
+//        DataSource ds = (DataSource) end.lookup("DBConnection");
+//        Connection conn = ds.getConnection();
+//        return conn;
+//    }
     
 //  public static void main(String[] agrs){
 //      Connection con = makeConnection();

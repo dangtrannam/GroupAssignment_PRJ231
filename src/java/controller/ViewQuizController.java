@@ -36,7 +36,7 @@ public class ViewQuizController extends HttpServlet {
 
         String type = (String) request.getParameter("type");
         String url = ERROR;
-        System.out.println("abc");
+        System.out.println("In....ViewQuizController....");
         try {
             QuizDAO dao = new QuizDAO();
             ArrayList<String> listID = dao.getQuizsIDbyType(type);
