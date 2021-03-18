@@ -80,7 +80,9 @@
                                 </c:if>
                             <div class="form-group">
                                 <td> <label for="Password">Password </label> </td>
-                                <td> <input type="text" ${readonly} name="Password" id="Password" class="form-control" value="${sessionScope.user.getPassword()}"> </td>
+                                <td> <input type="text" ${readonly} name="Password" id="Password" class="form-control" value="${sessionScope.user.getPassword()}"> 
+                                ${requestScope.emptyPass}</td> 
+                                
                             </div>
                             </tr>
 
@@ -88,7 +90,9 @@
                                 <tr>
                                 <div class="form-group">
                                     <td> <label for="re-Password">Re-Password </label> </td>
-                                    <td> <input type="text" ${readonly} name="re-Password" id="re-Password" class="form-control" value=""> </td>
+                                    <td> <input type="text" ${readonly} name="re-Password" id="re-Password" class="form-control" value="">
+                                    ${requestScope.emptyRePass}</td>
+                                    
                                 </div>
                                 </tr>
                             </c:if>
