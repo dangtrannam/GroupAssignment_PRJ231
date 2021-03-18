@@ -3,7 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/dtos/Account.java</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/daos/QuizDAO.java</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/controller/ChooseQuizController.java</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/dtos/Quiz.java</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/web/home.jsp</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/daos/AccountDAO.java</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/dtos/Answer.java</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/dtos/Question.java</file>
             <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/web/test.jsp</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/controller/ViewQuizController.java</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/daos/QuestionDAO.java</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/dbhelper/DBUtils.java</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/web/login&amp;register.jsp</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/daos/AnswerDAO.java</file>
+            <file>file:/D:/deskstop/prj/GroupAssignment_PRJ231/src/java/controller/SubmitController.java</file>
         </group>
     </open-files>
 </project-private>
