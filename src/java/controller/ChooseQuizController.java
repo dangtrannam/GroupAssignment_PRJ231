@@ -8,9 +8,7 @@ package controller;
 import daos.QuizDAO;
 import dtos.Quiz;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -45,7 +43,7 @@ public class ChooseQuizController extends HttpServlet {
 
             Quiz Quiz;
             if (quiz==null) {
-                System.out.println("asdasdassss");
+                System.out.println("test....");
                 Quiz = dao.getRandomQuiz(type);
                 request.setAttribute("QuizID", "Random");
                 System.out.println("Ramdon");

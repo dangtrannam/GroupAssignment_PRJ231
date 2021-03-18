@@ -5,7 +5,6 @@
  */
 package controller;
 
-import daos.AccountDAO;
 import dtos.Account;
 import java.io.IOException;
 import javax.servlet.ServletException;

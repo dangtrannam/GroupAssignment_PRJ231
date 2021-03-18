@@ -7,9 +7,6 @@ package controller;
 
 import daos.AnswerDAO;
 import daos.QuestionDAO;
-import daos.QuizDAO;
-import dtos.Answer;
-import dtos.Question;
 import dtos.Quiz;
 import java.io.IOException;
 import java.sql.SQLException;
