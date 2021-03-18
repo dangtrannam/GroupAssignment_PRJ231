@@ -5,6 +5,8 @@
  */
 package controller;
 
+import daos.AnswerDAO;
+import daos.QuestionDAO;
 import daos.QuizDAO;
 import dtos.Answer;
 import dtos.Question;
@@ -33,32 +35,34 @@ public class SubmitController extends HttpServlet {
             throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String QuizID = (String) request.getParameter("QuizID");
-
+        
         String url = ERROR;
 
         System.out.println("...In SubmitController...");
         try {
-            QuizDAO dao = new QuizDAO();
-            Quiz quiz = dao.getQuizbyQuizID(QuizID);
-            ArrayList<Question> questions = quiz.getList();
-            ArrayList<Integer> chosenAns = new ArrayList<>();
+           
+            AnswerDAO dao=new AnswerDAO();
+            QuestionDAO qdao=new QuestionDAO();
+            Quiz quiz=new Quiz();
+            ArrayList<String> chosenAns = new ArrayList<>();
             ArrayList<String> results=new ArrayList<>();
-            int grade = 0;
+            int size=Integer.parseInt(request.getParameter("size"));
+            int grade = 0; 
             int i;
-            for (i = 0; i < questions.size(); i++) {
-                String x = (String) request.getParameter(String.valueOf(i));              
+            for (i = 0; i < size ; i++) {
+                String x = (String) request.getParameter(String.valueOf(i));   
+                String y= (String) request.getParameter("q"+String.valueOf(i));
+                quiz.getList().add(qdao.getQuestionByID(y));
                 if (x != null) {
                     
-                    Question q = questions.get(i);
-                    Answer ans = q.getListAnswer().get(Integer.parseInt(x));
-                    if (ans != null && ans.getIsCorrect().trim().equals("true")) {
+                    
+                    if (x != null && dao.checkAns(x)) {
                         grade++;
                         results.add("bg-success");
                     } else results.add("bg-danger");
-                    chosenAns.add(Integer.parseInt(x));
+                    chosenAns.add(x);
                 } else {
-                    chosenAns.add(-1);
+                    chosenAns.add("");
                     results.add("bg-secondary");
                 }
             }
@@ -67,7 +71,7 @@ public class SubmitController extends HttpServlet {
             request.setAttribute("ChosenAns", chosenAns);
             request.setAttribute("Quiz", quiz);
             request.setAttribute("results", results);
-            
+            request.setAttribute("QuizID", request.getParameter("QuizID"));
             for (int j=0; j < chosenAns.size(); j++) {
                 System.out.println("choAns" +j+":"+chosenAns.get(j) +" - ");
             }

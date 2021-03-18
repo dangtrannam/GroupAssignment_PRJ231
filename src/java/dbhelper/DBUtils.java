@@ -17,7 +17,7 @@ public class DBUtils {
             
             //2. Tao object ket noi CSDL gom 3 param: url, username, pwd
             String url = "jdbc:sqlserver://localhost:1433;databaseName=GroupAssignment_PRJ";
-            Connection con = DriverManager.getConnection(url, "abc", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "1234567890");
             return con;
         } catch (ClassNotFoundException e) {
             // TODO: handle exception

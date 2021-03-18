@@ -90,6 +90,8 @@
                                    href="MainServlet?action=ChooseQuiz&QuizID=${id}&type=${requestScope.type}"> Đề ${id}</a>
 
                             </c:forEach>
+                             <a class="btn btn-success test"
+                                   href="MainServlet?action=ChooseQuiz&type=${requestScope.type}"> Đề random</a>
                         </div>
                     </div>
                 </div>

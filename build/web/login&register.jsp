@@ -42,7 +42,7 @@
                         </div>
 
                         <c:choose>
-                            <c:when test="${action}=='Register'">
+                            <c:when test="${action=='Register'}">
                                 <div class="form-group">
                                     <input class="form-control" type="password" placeholder="Re-password" name="re-psw" required/>
                                 </div>
