@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +69,7 @@
             <c:set var="questions" value="${Quiz.getList()}"></c:set>
 
                 <div class="container">
-                    <form action="MainServlet?action=Submit" name="f-doquiz" method="post">
+                    <form action="MainServlet?action=Submit" name="f-doquiz" method="post" id="f-doquiz">
                         <div class="row">
 
                             <div class="col-md-4">
@@ -89,15 +90,50 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="blockB" class="panel panel-default">
-                                <strong style="font-size:12pt; color:blue"> Thời gian còn lại:  <span id="countdown" class="timer"></span></strong>
 
-                            </div>
-                            <div id="blockC" class="panel panel-default">
-                                <div>
-                                    <input type="submit" name="nopbai" id="nopbai" value="Nộp bài">
-                                </div>
-                            </div>
+
+                            <c:choose >
+                                <c:when test="${state=='review'}">
+                                    <div id="blockB" class="panel panel-default">
+                                        <div class="result">
+                                            <strong>Kết quả bài làm</strong>
+                                            <p>Đề: ${questions.get(0).getQuizID()}</p>
+                                            <p>Số câu đúng: ${grade}</p>
+                                            <p>Số câu sai: ${questions.size()-grade}</p>
+                                            <c:set var="msg" value="KHÔNG ĐẠT" />
+                                            <c:if test="${grade >= 23}" >
+                                                <c:set var="msg" value="ĐẠT" />
+                                            </c:if>
+                                            <p>Kết quả: <span class="text-danger">${msg}</span></p>
+                                            <p>Chưa trả lời: <span class="text-secondary">Màu xám</span></p>
+                                            <p>Đáp án sai: <span class="text-danger">Màu đỏ</span></p>
+                                            <p>Đáp án đúng: <span class="text-success"> Màu xanh</span></p>
+
+                                        </div>
+                                    </div>
+
+
+                                    <c:set var="QuizType" value="${fn:substring(questions.get(0).getQuizID(),0,2)}" />
+                                    <div id="blockC" class="panel panel-default">
+                                        <div>
+                                            <a class="btn btn-primary" href="MainServlet?action=viewQuiz&quiz=${QuizType}" >Chọn đề khác</a>
+                                        </div>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div id="blockB" class="panel panel-default">
+
+                                        <strong style="font-size:12pt; color:blue"> Thời gian còn lại:  <span id="countdown" class="timer"></span></strong>
+                                    </div>
+
+                                    <div id="blockC" class="panel panel-default">
+                                        <div>
+                                            <input type="submit" name="nopbai" id="nopbai" value="Nộp bài">
+                                        </div>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+
 
                         </div>
 

@@ -153,3 +153,12 @@ input#nopbai{
     color: white;
     padding: 10px;
 }
+
+.result{
+    padding: 5px 20px;
+    font-size: 1.2rem;
+}
+
+.result span{
+    font-size: 1.3rem;
+}
