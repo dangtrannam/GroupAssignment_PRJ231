@@ -20,17 +20,17 @@
                 <!-- Start: Navigation with Search -->
                 <nav role="navigation"
                      class="navbar navbar-dark navbar-expand-md bg-success border rounded navigation-clean-search relative">
-                    <div class="container"><a class="navbar-brand homepage" href="MainServlet?action=viewQuiz&quiz=A1">Trang chủ</a>
+                    <div class="container"><a class="navbar-brand homepage" href="MainServlet?action=viewQuiz&type=A1">Trang chủ</a>
                         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navcol-1">
                             <ul class="nav navbar-nav">
-                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=A1">Thi thử­ A1</a></li>
-                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=A2">Thi thử­­ A2</a></li>
-                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=B1">Thi thử­­ B1</a></li>
-                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=B2">Thi thử­­ B2</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&type=A1">Thi thử­ A1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&type=A2">Thi thử­­ A2</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&type=B1">Thi thử­­ B1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&type=B2">Thi thử­­ B2</a></li>
 
                             </ul>
 

@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
         String login = "login&register.jsp";
         String main = "MainServlet";
         String homepage = "home.jsp";
-        String success="MainServlet?action=viewQuiz&quiz=A1";
+        String success="MainServlet?action=viewQuiz&type=A1";
         String url = ERROR;
         if (action == null) {
             url = main;

@@ -34,14 +34,14 @@ public class ViewQuizController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
-        String quiz = (String) request.getParameter("quiz");
+        String type = (String) request.getParameter("type");
         String url = ERROR;
         System.out.println("abc");
         try {
             QuizDAO dao = new QuizDAO();
-            ArrayList<String> listID = dao.getQuizsIDbyType(quiz);
+            ArrayList<String> listID = dao.getQuizsIDbyType(type);
             request.setAttribute("listID", listID);
-            request.setAttribute("quiz", quiz);
+            request.setAttribute("type", type);
             System.out.println(listID.size());
 
             url = SUCCESS;

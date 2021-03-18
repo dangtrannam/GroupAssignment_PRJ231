@@ -44,9 +44,8 @@ public class ChooseQuizController extends HttpServlet {
             Quiz Quiz = dao.getQuizbyQuizID(quiz);
             
             request.setAttribute("Quiz", Quiz);
-            request.setAttribute("QuizType", request.getParameter("Type"));
-            
-            System.out.println(request.getParameter("Type"));
+            request.setAttribute("type", request.getParameter("type"));
+           
 
             url = SUCCESS;
         } catch (SQLException | NamingException e) {
