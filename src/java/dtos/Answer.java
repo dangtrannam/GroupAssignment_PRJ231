@@ -13,19 +13,35 @@ public class Answer {
     private String QuestionID;
     private String Content;
     private String isCorrect;
-
+    private String ID;
     public Answer() {
     QuestionID = "";
     Content="";
     isCorrect="";
+    ID="";
     }
-
+    
     public Answer(String QuestionID, String Content, String isCorrect) {
         this.QuestionID = QuestionID;
         this.Content = Content;
         this.isCorrect = isCorrect;
     }
 
+    public Answer(String QuestionID, String Content, String isCorrect, String ID) {
+        this.QuestionID = QuestionID;
+        this.Content = Content;
+        this.isCorrect = isCorrect;
+        this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+    
     public String getQuestionID() {
         return QuestionID;
     }

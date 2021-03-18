@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.naming.NamingException;
 
 /**
@@ -61,12 +62,13 @@ public class QuizDAO {
                 pstm = con.prepareStatement(sql);
                 pstm.setString(1, QuizID);
                 rs = pstm.executeQuery();
+                AnswerDAO dao=new AnswerDAO();
                 while (rs.next()) {
                     list.add(new Question(rs.getString("QuestionID"),
                             rs.getString("QuizID"),
                             rs.getString("Question"),
                             rs.getString("ImageUrl"),
-                            getAnswersbyQuestionID(rs.getString("QuestionID"))));
+                            dao.getAnswersbyQuestionID(rs.getString("QuestionID"))));
                 }
             }
         } finally {
@@ -82,25 +84,45 @@ public class QuizDAO {
         }
         return new Quiz(list);
     }
-
-    public ArrayList<Answer> getAnswersbyQuestionID(String QuestionID) throws NamingException, SQLException {
+    public Quiz getRandomQuiz(String type) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM Answer WHERE QuestionID=?";
+        String sql = "SELECT * FROM Question WHERE  QuizID in (SELECT QuizID from Quiz where QuizType=?)";
 
-        ArrayList<Answer> list = new ArrayList();
+        ArrayList<Question> list = new ArrayList();
+        ArrayList<Question> res=new ArrayList();
         try {
             con = DBUtils.makeConnection();
+            System.out.println(type);
             if (con != null) {
                 pstm = con.prepareStatement(sql);
-                pstm.setString(1, QuestionID);
+                          System.out.println(sql);
+                pstm.setString(1, type);
                 rs = pstm.executeQuery();
+                AnswerDAO dao=new AnswerDAO();
                 while (rs.next()) {
-                    list.add(new Answer(rs.getString("QuestionID"),
-                            rs.getString("Answer"),
-                            rs.getString("isCorrect")));
+                    list.add(new Question(rs.getString("QuestionID"),
+                            rs.getString("QuizID"),
+                            rs.getString("Question"),
+                            rs.getString("ImageUrl"),
+                            dao.getAnswersbyQuestionID(rs.getString("QuestionID"))));
+                    System.out.println(list.size());
                 }
+            }
+            System.out.println("da1o");
+            Random random = new Random();
+            Question q=new Question();
+            int n=25,i;
+            if (type.startsWith("B")) n=30;
+            for(i=1;i<=n;i++)
+            {
+                q=list.get(random.nextInt(list.size()));
+                System.out.println(i);
+                System.out.println(q.getContent());
+                boolean check=true;
+                for (Question re : res)  if (re.getContent().equals(q.getContent())) {check=false;i--;break;}
+                if (check) res.add(q);
             }
         } finally {
             if (rs != null) {
@@ -113,14 +135,11 @@ public class QuizDAO {
                 con.close();
             }
         }
-        return list;
+        return new Quiz(res);
     }
 
-    public static void main(String[] agrs) throws NamingException, SQLException {
-//        QuizDAO accDAO = new QuizDAO();
-//        Account acc = new Account("user1", "123123", "user");
-//        boolean check = accDAO.register(acc);
-//        System.out.println(check);
-    }
+    
+
+ 
 
 }

@@ -21,17 +21,17 @@
                 <!-- Start: Navigation with Search -->
                 <nav role="navigation"
                      class="navbar navbar-dark navbar-expand-md bg-success border rounded navigation-clean-search relative">
-                    <div class="container"><a class="navbar-brand homepage" href="MainServlet?action=viewQuiz&quiz=A1">Trang chủ</a>
+                    <div class="container"><a class="navbar-brand homepage" href="MainServlet?action=viewQuiz&type=A1">Trang chủ</a>
                         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navcol-1">
                             <ul class="nav navbar-nav">
-                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=A1">Thi thử­ A1</a></li>
-                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=A2">Thi thử­­ A2</a></li>
-                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=B1">Thi thử­­ B1</a></li>
-                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&quiz=B2">Thi thử­­ B2</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&type=A1">Thi thử­ A1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&type=A2">Thi thử­­ A2</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&type=B1">Thi thử­­ B1</a></li>
+                                <li class="nav-item"><a class="nav-link" href="MainServlet?action=viewQuiz&type=B2">Thi thử­­ B2</a></li>
 
                             </ul>
 
@@ -97,7 +97,7 @@
                                     <div id="blockB" class="panel panel-default">
                                         <div class="result">
                                             <strong>Kết quả bài làm</strong>
-                                            <p>Đề: ${questions.get(0).getQuizID()}</p>
+                                            <p>Đề: ${requestScope.QuizID}</p>
                                             <p>Số câu đúng: ${grade}</p>
                                             <p>Số câu sai: ${questions.size()-grade}</p>
                                             <c:set var="msg" value="KHÔNG ĐẠT" />
@@ -116,7 +116,7 @@
                                     <c:set var="QuizType" value="${fn:substring(questions.get(0).getQuizID(),0,2)}" />
                                     <div id="blockC" class="panel panel-default">
                                         <div>
-                                            <a class="btn btn-primary" href="MainServlet?action=viewQuiz&quiz=${QuizType}" >Chọn đề khác</a>
+                                            <a class="btn btn-primary" href="MainServlet?action=viewQuiz&type=${QuizType}" >Chọn đề khác</a>
                                         </div>
                                     </div>
                                 </c:when>
@@ -136,18 +136,21 @@
 
 
                         </div>
-
+                         
                         <div class="col-md-8">
                             <div class="panel panel-default" id="blockD">
                                 <div class="panel-body">
                                     <div>
 
-                                        <input type="hidden" name="QuizID" value="${questions.get(0).getQuizID()}">
+                                        <input type="hidden" name="QuizID" value="${requestScope.QuizID}">
+                                    
                                         <c:set var="i" value="0"/>
 
 
                                         <c:forEach items="${questions}" var="question">
+                                            <input type="hidden" name="q${i}" value="${question.getID()}">
                                             <c:set var="i" value="${i+1}"/>
+                                            
                                             <div class="row d-none ndcauhoi" id="cauhoi${i}"/>
                                             <div class="row">
                                                 <div class="col-md-12 text-primary">
@@ -169,7 +172,7 @@
                                                         <c:if test="${state=='review'}" var="testState">
                                                             <c:set var="isRight" value="text-danger" />
 
-                                                            <c:if test="${chosenAnsList.get(i-1) == j}" var="choseRight">
+                                                            <c:if test="${chosenAnsList.get(i-1) == answer.getID()}" var="choseRight">
                                                                 <c:set var="checked" value="checked" />
                                                             </c:if>
                                                             <c:if test="${answer.getIsCorrect().trim()=='true'}" var="IsRight">
@@ -177,15 +180,15 @@
                                                             </c:if>
                                                         </c:if>
 
-
+                                                        <input type="hidden" name="size" value="${questions.size()}">
+                                                            
                                                         <div class="cautraloi">
                                                             <label class="checkbox-inline ${isRight}">
-                                                                <input type="radio" class="answer " name="${i-1}" value="${j}" ${checked} > ${answer.getContent()}
+                                                                <input type="radio" class="answer " name="${i-1}" value="${answer.getID()}" ${checked} > ${answer.getContent()}
                                                             </label>
                                                         </div>
 
 
-                                                        <c:set var="j" value="${j+1}"/>
 
                                                     </c:forEach>
                                                 </div>

@@ -31,22 +31,34 @@ public class ChooseQuizController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         System.out.println("In.... ChooseQuizController.....");
-        
+
         String quiz = (String) request.getParameter("QuizID");
+        String type = request.getParameter("type");
         System.out.println(quiz);
-        
+
         String url = ERROR;
-        
+
         try {
             QuizDAO dao = new QuizDAO();
-            Quiz Quiz = dao.getQuizbyQuizID(quiz);
-            
+
+            Quiz Quiz;
+            if (quiz==null) {
+                System.out.println("asdasdassss");
+                Quiz = dao.getRandomQuiz(type);
+                request.setAttribute("QuizID", "Random");
+                System.out.println("Ramdon");
+            } else {
+                Quiz = dao.getQuizbyQuizID(quiz);
+                
+                request.setAttribute("QuizID", quiz);
+            }
+            System.out.println(Quiz);
+            System.out.println(Quiz.getList().size());
+            System.out.println(Quiz.getList().get(0).getContent());
             request.setAttribute("Quiz", Quiz);
-            request.setAttribute("QuizType", request.getParameter("Type"));
-            
-            System.out.println(request.getParameter("Type"));
+            request.setAttribute("type", type);
 
             url = SUCCESS;
         } catch (SQLException | NamingException e) {
