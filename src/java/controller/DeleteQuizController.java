@@ -5,9 +5,10 @@
  */
 package controller;
 
-import daos.AccountDAO;
+import daos.QuizDAO;
 import dtos.Account;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,52 +20,33 @@ import javax.servlet.http.HttpSession;
  *
  * @author macbookpro2018
  */
-@WebServlet(name = "CheckPasswordController", urlPatterns = {"/CheckPasswordController"})
-public class CheckPasswordController extends HttpServlet {
+@WebServlet(name = "DeleteQuizController", urlPatterns = {"/DeleteQuizController"})
+public class DeleteQuizController extends HttpServlet {
 
-    private static String ERROR = "error.js";
-    private static String SUCCESS = "login&register.jsp";
+    private static String ERROR = "error.jsp";
+    private static String SUCCESS = "home.jsp";
+    private static String INVALID = "MainServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String password = request.getParameter("Password") == null ? "" : request.getParameter("Password");
-            String repassword = request.getParameter("re-Password") == null ? "" : request.getParameter("re-Password");
-
-            //If password or re-password is empty -> send back the msg
-            if (password.isEmpty()) {
-                request.setAttribute("emptyPass", "<p class='text-danger'>This should not be empty!</p>");
-                url = "profile.jsp";
-                request.setAttribute("state", "changePassword");
-            }
-            if (repassword.isEmpty()) {
-                request.setAttribute("emptyRePass", "<p class='text-danger'>This should not be empty!</p>");
-                url = "profile.jsp";
-                request.setAttribute("state", "changePassword");
-
-            } else {
-                if (password.equals(repassword)) {
-                    AccountDAO accDao = new AccountDAO();
-
-                    HttpSession session = request.getSession(false);
-                    if (session != null) {
-                        Account user = (Account) session.getAttribute("user");
-                        boolean check = accDao.changePassword(new Account(user.getUserName(), password, user.getRole()));
-                        if (check) {
-                            session.removeAttribute("user");
-                            url = SUCCESS;
-                        }
-                    }
+            HttpSession session = request.getSession(false);
+            Account user = (Account) session.getAttribute("user");
+            if (user != null || user.getRole().equals("admin")) {
+                String QuizID = request.getParameter("QuizID");
+                QuizDAO qDao = new QuizDAO();
+                if (qDao.deleteQuiz(QuizID)) {
+                    url = SUCCESS;
                 } else {
-                    request.setAttribute("ERROR", "");
-                    url = "profile.jsp";
+                    request.setAttribute("INVALID", "<p class='text-danger'>You don't have permission to use this function!</p>");
+                    url = INVALID;
                 }
             }
 
         } catch (Exception e) {
-            log("Error at Check password Controller: " + e.getMessage());
+            log("Error at Delete  Quiz Controller: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
