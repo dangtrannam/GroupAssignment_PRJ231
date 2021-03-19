@@ -19,6 +19,7 @@
         <header>
             <div class="container">
                 <!-- Start: Navigation with Search -->
+
                 <nav role="navigation"
                      class="navbar navbar-dark navbar-expand-md bg-success border rounded navigation-clean-search relative">
                     <div class="container"><a class="navbar-brand homepage" href="MainServlet">Trang chủ</a>
@@ -68,18 +69,24 @@
                 <c:set var="grade" value="${requestScope.grade}" />
             </c:if>
             <c:set var="questions" value="${Quiz.getList()}"></c:set>
+            <input type="hidden" value="${questions.size()}" id="number_question">
+            <div class="container">
+                <form action="MainServlet?action=Submit" name="f-doquiz" method="post" id="f-doquiz">
+                    <div class="row">
 
-                <div class="container">
-                    <form action="MainServlet?action=Submit" name="f-doquiz" method="post" id="f-doquiz">
-                        <div class="row">
+                        <div class="col-md-4">
+                            <div class="panel panel-default" id="blockA">
+                                <div class="panel-body">
+                                    <div style="margin: bottom 10px;">
+                                        <strong style="font-size: 12pt; color: blue;">Câu hỏi | Đề luyện thi ${requestScope.QuizID}</strong>
 
-                            <div class="col-md-4">
-                                <div class="panel panel-default" id="blockA">
-                                    <div class="panel-body">
+                                    </div>
+                                    <c:if test="${requestScope.highscore!=null}">
                                         <div style="margin: bottom 10px;">
-                                            <strong style="font-size: 12pt; color: blue;">Câu hỏi | Đề số: 01 - 200 Câu Hỏi Thi A1</strong>
+                                            <strong style="font-size: 12pt; color: blue;">High score:  ${requestScope.highscore}</strong>
                                         </div>
-                                        <div id="questionList">
+                                    </c:if>
+                                    <div id="questionList">
                                         <c:forEach var="btn" begin="1" end="${questions.size()}">
 
                                             <label class="${requestScope.results.get(btn-1)} btn btn-success btn-cauhoi clickcauhoi btn-${btn} " id="show${btn}" data-id="data${btn}">
@@ -120,6 +127,7 @@
                                             <a class="btn btn-primary d-block" href="MainServlet?action=viewQuiz&type=${QuizType}" >Chọn đề khác</a>
                                         </div>
                                     </div>
+
                                 </c:when>
                                 <c:otherwise>
                                     <div id="blockB" class="panel panel-default">
@@ -147,7 +155,7 @@
                                     <div>
 
                                         <input type="hidden" name="QuizID" value="${requestScope.QuizID}">
-
+                                        <input type="hidden" name="type" value="${requestScope.type}">
                                         <c:set var="i" value="0"/>
 
 

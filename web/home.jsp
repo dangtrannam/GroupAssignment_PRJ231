@@ -143,9 +143,7 @@
                                 <div>
                                     <a class="btn btn-success test d-inline"
                                        href="MainServlet?action=ChooseQuiz&QuizID=${id}&type=${requestScope.type}"> Đề ${id}</a>
-                                    <c:if test="${sessionScope.user.getRole()=='admin'}">
-                                        <a class="btn btn-primary d-inline" href="MainServlet?action=DeleteQuiz&QuizID=${id}" onclick="return confirm('Bạn có chắc không?')"> Xoá đề </a>
-                                    </c:if>
+                                  
                                 </div>
 
 

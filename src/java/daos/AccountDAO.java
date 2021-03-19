@@ -68,6 +68,11 @@ public class AccountDAO {
                 pstm.setString(3, acc.getRole());
 
                 pstm.executeUpdate();
+                HighScoreDAO dao=new HighScoreDAO();
+                dao.insertHighScore(acc.getUserName(), "A1");
+                dao.insertHighScore(acc.getUserName(), "A2");
+                dao.insertHighScore(acc.getUserName(), "B1");
+                dao.insertHighScore(acc.getUserName(), "B2");
                 return true;
             }
         } finally {

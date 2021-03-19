@@ -6,7 +6,9 @@
 package controller;
 
 import daos.AnswerDAO;
+import daos.HighScoreDAO;
 import daos.QuestionDAO;
+import dtos.Account;
 import dtos.Quiz;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,52 +34,61 @@ public class SubmitController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        String type = request.getParameter("type");
+        HttpSession session = request.getSession();
+        HighScoreDAO hsDAO = new HighScoreDAO();
+        Account acc = (Account) session.getAttribute("user");
 
-        
+        request.setAttribute("type", type);
         String url = ERROR;
 
         System.out.println("...In SubmitController...");
         try {
-           
-            AnswerDAO dao=new AnswerDAO();
-            QuestionDAO qdao=new QuestionDAO();
-            Quiz quiz=new Quiz();
+
+            AnswerDAO dao = new AnswerDAO();
+            QuestionDAO qdao = new QuestionDAO();
+            Quiz quiz = new Quiz();
             ArrayList<String> chosenAns = new ArrayList<>();
-            ArrayList<String> results=new ArrayList<>();
-            int size=Integer.parseInt(request.getParameter("size"));
-            int grade = 0; 
+            ArrayList<String> results = new ArrayList<>();
+            int size = Integer.parseInt(request.getParameter("size"));
+            int grade = 0;
             int i;
-            for (i = 0; i < size ; i++) {
-                String x = (String) request.getParameter(String.valueOf(i));   
-                String y= (String) request.getParameter("q"+String.valueOf(i));
+            for (i = 0; i < size; i++) {
+                String x = (String) request.getParameter(String.valueOf(i));
+                String y = (String) request.getParameter("q" + String.valueOf(i));
                 quiz.getList().add(qdao.getQuestionByID(y));
-                if (x != null) {
-                    
-                    
-                    if (x != null && dao.checkAns(x)) {
+                if (x != null){
+                    if (dao.checkAns(x)) {
                         grade++;
                         results.add("bg-success");
-                    } else results.add("bg-danger");
+                    } else {
+                        results.add("bg-danger");
+                    }
                     chosenAns.add(x);
                 } else {
                     chosenAns.add("");
                     results.add("bg-secondary");
                 }
             }
-            
+            System.out.println(grade);
+            if (acc != null) {
+                System.out.println(acc);
+                String highscore = hsDAO.updateHighScore(acc.getUserName(), type, String.valueOf(grade));
+                System.out.println(highscore);
+                request.setAttribute("highscore", highscore);
+            }
+            System.out.println("done");
             request.setAttribute("grade", grade);
             request.setAttribute("ChosenAns", chosenAns);
             request.setAttribute("Quiz", quiz);
             request.setAttribute("results", results);
             request.setAttribute("QuizID", request.getParameter("QuizID"));
-            for (int j=0; j < chosenAns.size(); j++) {
-                System.out.println("choAns" +j+":"+chosenAns.get(j) +" - ");
-            }
-            
+           
+
             url = SUCCESS;
 
         } catch (SQLException | NamingException e) {
-            log("Error at ChooseQuizController: " + e.getMessage());
+            log("Error at SubmitController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

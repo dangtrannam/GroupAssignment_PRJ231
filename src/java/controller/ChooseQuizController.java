@@ -5,7 +5,9 @@
  */
 package controller;
 
+import daos.HighScoreDAO;
 import daos.QuizDAO;
+import dtos.Account;
 import dtos.Quiz;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,8 +37,18 @@ public class ChooseQuizController extends HttpServlet {
 
         String quiz = (String) request.getParameter("QuizID");
         String type = request.getParameter("type");
+        HttpSession session=request.getSession();
+        HighScoreDAO hsDAO=new HighScoreDAO();
+        Account acc=(Account) session.getAttribute("user");
+        System.out.println(acc);
+        if (acc!=null) {
+     
+        String highscore = hsDAO.getHighScore( acc.getUserName(), type);
+            System.out.println(highscore);
+        request.setAttribute("highscore", highscore);
+        }
         System.out.println(quiz);
-
+        
         String url = ERROR;
 
         try {
@@ -57,7 +70,8 @@ public class ChooseQuizController extends HttpServlet {
             System.out.println(Quiz.getList().get(0).getContent());
             request.setAttribute("Quiz", Quiz);
             request.setAttribute("type", type);
-
+          
+            
             url = SUCCESS;
         } catch (SQLException | NamingException e) {
             log("Error at ChooseQuizController: " + e.getMessage());

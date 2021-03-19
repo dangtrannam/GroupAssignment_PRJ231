@@ -10,7 +10,7 @@ function showQuestion(index)
 
 }
 $(document).ready(function () {
-
+    let n=$("#number_question").prop("value");
     let id = 1;
     //interact with questionList buttons
     $("#show1").addClass("active");
@@ -27,7 +27,7 @@ $(document).ready(function () {
 //        $("#cauhoi" + i).addClass("d-none");
 //        $("#show" + i).removeClass("active");
 //        }
-
+    
         $("#cauhoi" + id).addClass("d-block");
         $("#cauhoi" + id).removeClass("d-none");
         $("#show" + id).addClass("active");
@@ -47,7 +47,7 @@ $(document).ready(function () {
         $("#cauhoi" + id).removeClass("d-block");
         $("#cauhoi" + id).addClass("d-none");
         $("#show" + id).removeClass("active");
-        id = id % 25 + 1;
+        id = id % n + 1;
         $("#cauhoi" + id).addClass("d-block");
         $("#cauhoi" + id).removeClass("d-none");
         $("#show" + id).addClass("active");
@@ -61,7 +61,7 @@ $(document).ready(function () {
         $("#show" + id).removeClass("active");
         id--;
         if (id == 0)
-            id = 25;
+            id = n;
         $("#cauhoi" + id).addClass("d-block");
         $("#cauhoi" + id).removeClass("d-none");
         $("#show" + id).addClass("active");

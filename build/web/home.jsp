@@ -80,6 +80,49 @@
                                     <strong>Câu Điểm Liệt</strong>" đồng nghĩa với việc "<strong>KHÔNG ĐẠT</strong>" 
                                     dù cho các câu khác trả lời đúng!</p>
                                 </c:when>
+                                <c:when test="${type=='A2'}">
+                                <h3 class="text-center text-primary">BỘ ĐỀ THI BẰNG LÁI XE A2 ONLINE BẢN CHUẨN</h3>
+                                <p>CCấu trúc bộ đề luyện thi sát hạch A2 luật mới áp dụng chính thức từ 01/08/2020 sẽ bao gồm 25 câu hỏi,
+                                    mỗi câu hỏi có duy nhất 1 đáp trả lời đúng. Mỗi đề thi A2 bố trí từ 2 - 4 câu hỏi điểm liệt để học viên có thể làm quen và ghi nhớ, 
+                                    tránh việc làm sai câu hỏi liệt. Trong kỳ thi thật cấu trúc đề thi sẽ được sắp xếp theo dạng ngẫu nhiên, yêu cầu học viên phải học - 
+                                    hiểu để vượt qua các câu hỏi, tránh tình trạng học tủ hay học vẹt.</p>
+                                <ul>
+                                    <li>Số lượng câu hỏi:&nbsp;<strong>25 câu</strong>.</li>
+                                    <li>Yêu cầu làm đúng&nbsp;<strong>23/25 câu</strong>.</li>
+                                    <li>Thời gian:&nbsp;<strong>19 phút</strong>.</li>
+                                </ul>
+                                <p><strong>Lưu ý đặc biệt:</strong>&nbsp;uyệt đối không được làm sai câu hỏi điểm liệt, vì trong kỳ thi thật nếu học viên làm sai "
+                                    <strong>Câu Điểm Liệt</strong>" đồng nghĩa với việc "<strong>KHÔNG ĐẠT</strong>" 
+                                    dù cho các câu khác trả lời đúng!</p>
+                                </c:when>
+                                <c:when test="${type=='B1'}">
+                                <h3 class="text-center text-primary">CẤU TRÚC ĐỀ THI BẰNG LÁI XE Ô TÔ TRỰC TUYẾN</h3>
+                                <p>Đề thi lý thuyết bằng lái xe B2 - C online  mỗi đề gồm 30 câu, mỗi câu hỏi chỉ có 1 đáp án đúng.
+                                    Trong mỗi đề thi lý thuyết lái xe B2 online sẽ gồm: 9 câu hỏi biển báo giao thông, 9 câu giải sa hình, 9 câu hỏi luật giao thông và các quy tắc khi tham gia giao thông an toàn, 
+                                    1 câu hỏi về kinh doanh vận tải, 1 câu kỹ thuật lái xe Ôtô và sửa chữa cơ bản, cuối cùng là 1 câu đạo đức của người lái xe.</p>
+                                <ul>
+                                    <li>Số lượng câu hỏi:&nbsp;<strong>30 câu</strong>.</li>
+                                    <li>Yêu cầu làm đúng&nbsp;<strong>27/30 câu</strong>.</li>
+                                    <li>Thời gian:&nbsp;<strong>19 phút</strong>.</li>
+                                </ul>
+                                <p><strong>Lưu ý đặc biệt:</strong>&nbsp;uyệt đối không được làm sai câu hỏi điểm liệt, vì trong kỳ thi thật nếu học viên làm sai "
+                                    <strong>Câu Điểm Liệt</strong>" đồng nghĩa với việc "<strong>KHÔNG ĐẠT</strong>" 
+                                    dù cho các câu khác trả lời đúng!</p>
+                                </c:when>
+                                <c:when test="${type=='B2'}">
+                                <h3 class="text-center text-primary">CẤU TRÚC ĐỀ THI BẰNG LÁI XE Ô TÔ TRỰC TUYẾN</h3>
+                                <p>Cấu trúc bộ đề thi sát hạch giấy phép lái xe hạng A1 sẽ bao gồm 25 câu hỏi, mỗi câu hỏi chỉ có duy nhất 
+                                    1 đáp trả lời đúng phản ánh đúng bản chất của thi trắc nghiệm. Khác hẳn với bộ đề thi luật cũ là 2 đáp án. Mỗi đề thi chúng tôi sẽ bố trí từ 2 - 4 
+                                    câu hỏi điểm liệt để học viên có thể làm quen và ghi nhớ, tránh việc làm sai câu hỏi liệt.</p>
+                                <ul>
+                                    <li>Số lượng câu hỏi:&nbsp;<strong>30 câu</strong>.</li>
+                                    <li>Yêu cầu làm đúng&nbsp;<strong>27/30 câu</strong>.</li>
+                                    <li>Thời gian:&nbsp;<strong>19 phút</strong>.</li>
+                                </ul>
+                                <p><strong>Lưu ý đặc biệt:</strong>&nbsp;uyệt đối không được làm sai câu hỏi điểm liệt, vì trong kỳ thi thật nếu học viên làm sai "
+                                    <strong>Câu Điểm Liệt</strong>" đồng nghĩa với việc "<strong>KHÔNG ĐẠT</strong>" 
+                                    dù cho các câu khác trả lời đúng!</p>
+                                </c:when>
                             </c:choose>
 
                         <div class="text-center" style="margin: 20px">
@@ -100,7 +143,7 @@
                                 <div>
                                     <a class="btn btn-success test d-inline"
                                        href="MainServlet?action=ChooseQuiz&QuizID=${id}&type=${requestScope.type}"> Đề ${id}</a>
-            
+                                  
                                 </div>
 
 
