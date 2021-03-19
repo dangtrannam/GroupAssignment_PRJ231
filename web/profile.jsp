@@ -124,7 +124,7 @@
 
                     </form>
 
-                    <c:url var="homepage" value="MainServlet?action=viewQuiz&quiz=A1" />
+                    <c:url var="homepage" value="MainServlet" />
                     <a href="${homepage}"> Return to the homepage</a>
                 </div>
             </div>

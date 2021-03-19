@@ -129,7 +129,10 @@
 
                                     <div id="blockC" class="panel panel-default">
                                         <div>
-                                            <input type="submit" name="nopbai" id="nopbai" value="Nộp bài">
+                                            <input type="submit" name="nopbai" id="nopbai" class="nopbaibutton" value="Nộp bài">
+                                            <c:if test="${sessionScope.user.getRole()=='admin' && requestScope.QuizID!='Random'}">
+                                                <a class="nopbaibutton" href="MainServlet?action=DeleteQuiz&QuizID=${requestScope.QuizID}" onclick="return confirm('Bạn có chắc không?')"> Xoá đề </a>
+                                            </c:if>
                                         </div>
                                     </div>
                                 </c:otherwise>
@@ -137,21 +140,21 @@
 
 
                         </div>
-                         
+
                         <div class="col-md-8">
                             <div class="panel panel-default" id="blockD">
                                 <div class="panel-body">
                                     <div>
 
                                         <input type="hidden" name="QuizID" value="${requestScope.QuizID}">
-                                    
+
                                         <c:set var="i" value="0"/>
 
 
                                         <c:forEach items="${questions}" var="question">
                                             <input type="hidden" name="q${i}" value="${question.getID()}">
                                             <c:set var="i" value="${i+1}"/>
-                                            
+
                                             <div class="row d-none ndcauhoi" id="cauhoi${i}"/>
                                             <div class="row">
                                                 <div class="col-md-12 text-primary">
@@ -182,7 +185,7 @@
                                                         </c:if>
 
                                                         <input type="hidden" name="size" value="${questions.size()}">
-                                                            
+
                                                         <div class="cautraloi">
                                                             <label class="checkbox-inline ${isRight}">
                                                                 <input type="radio" class="answer " name="${i-1}" value="${answer.getID()}" ${checked} > ${answer.getContent()}

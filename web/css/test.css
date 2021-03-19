@@ -146,12 +146,13 @@ div#blockB{
     padding: 10px 10px;
 }
 
-input#nopbai{
+.nopbaibutton{
     display: inline-block;
     width: 100%;
     background-color: #0169DA;
     color: white;
     padding: 10px;
+    text-align: center;
 }
 
 .result{
