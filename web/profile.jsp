@@ -124,14 +124,6 @@
 
                     </form>
 
-                    <c:if test="${sessionScope.user.getRole()=='admin'}">
-                        <c:url var="adminpage" value="MainServlet" >
-                            <c:param name="action" value="goAdminpage"></c:param>
-                        </c:url>
-                            <a href="${adminpage}">Go to the admin page</a>
-                    </c:if>
-
-
                     <c:url var="homepage" value="MainServlet?action=viewQuiz&quiz=A1" />
                     <a href="${homepage}"> Return to the homepage</a>
                 </div>
