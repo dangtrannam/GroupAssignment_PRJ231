@@ -21,3 +21,4 @@ src/java/dbhelper/DBUtils.java
 *.properties
 *.properties
 web/.DS_Store
+*.class
