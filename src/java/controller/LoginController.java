@@ -66,7 +66,7 @@ public class LoginController extends HttpServlet {
                 } else {
                     request.removeAttribute("action");
                     request.setAttribute("action", "Login");
-                    request.setAttribute("msg", "Login failed!");
+                    request.setAttribute("msg", "<p class='text-danger'>Login failed!</p>");
                 }
 
             } else if (action.equals("Logout")) {
@@ -74,19 +74,20 @@ public class LoginController extends HttpServlet {
                 if (session != null) {
                     session.removeAttribute("user");
                     request.setAttribute("action", "Login");
+                    url = "welcomepage.jsp";
                 }
             } else if (action.equals("handleRegister")) {
                 String userForm = request.getParameter("uname");
                 String passForm = request.getParameter("psw");
                 String repassForm = request.getParameter("re-psw");
 
-                String msg = "Register failed!";
+                String msg = "<p class='text-danger'>Register failed!</p>";
 
                 if (passForm.equals(repassForm)) {
                     Account acc = new Account(userForm, passForm, "user");
                     AccountDAO accDAO = new AccountDAO();
                     if (accDAO.register(acc)) {
-                        msg = "Register success!";
+                        msg = "<p class='text-success'>Register success!</p>";
                     }
                 }
 
