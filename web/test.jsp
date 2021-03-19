@@ -21,7 +21,7 @@
                 <!-- Start: Navigation with Search -->
                 <nav role="navigation"
                      class="navbar navbar-dark navbar-expand-md bg-success border rounded navigation-clean-search relative">
-                    <div class="container"><a class="navbar-brand homepage" href="MainServlet?action=viewQuiz&type=A1">Trang chủ</a>
+                    <div class="container"><a class="navbar-brand homepage" href="MainServlet">Trang chủ</a>
                         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="navbar-toggler-icon"></span>
@@ -40,15 +40,16 @@
                                     <c:when  test="${not empty sessionScope.user.userName}">
                                         <c:url value="MainServlet?action=ViewProfileController" var ="profileLink"></c:url>
                                         <a  href="${profileLink}" class="btn  btn-sm login " >Welcome <c:out value = "${sessionScope.user.userName}" /></a>
+                                        <c:url value="MainServlet?action=Logout" var="LogoutLink"></c:url>
+                                        <a href="${LogoutLink}" class="btn btn-sm logout ">Đăng xuất</a>
                                     </c:when>
                                     <c:otherwise>
                                         <c:url value="MainServlet?action=Login" var ="LoginLink"></c:url>
                                         <a  href="${LoginLink}" class="btn  btn-sm login " >Đăng nhập</a>
+                                        <c:url value="MainServlet?action=Register" var="ResLink"></c:url>
+                                        <a href="${ResLink}" class="btn btn-sm logout ">Đăng ký</a>
                                     </c:otherwise>
                                 </c:choose>
-
-                                <c:url value="MainServlet?action=Logout" var="LogoutLink"></c:url>
-                                <a href="${LogoutLink}" class="btn btn-sm logout ">Đăng xuất</a>
                             </div>
 
                         </div>
@@ -116,7 +117,7 @@
                                     <c:set var="QuizType" value="${fn:substring(questions.get(0).getQuizID(),0,2)}" />
                                     <div id="blockC" class="panel panel-default">
                                         <div>
-                                            <a class="btn btn-primary" href="MainServlet?action=viewQuiz&type=${QuizType}" >Chọn đề khác</a>
+                                            <a class="btn btn-primary d-block" href="MainServlet?action=viewQuiz&type=${QuizType}" >Chọn đề khác</a>
                                         </div>
                                     </div>
                                 </c:when>
@@ -160,7 +161,7 @@
                                                 <div class="col-12" style="text-align: justify;">
                                                     <strong>${question.getContent()}</strong>
                                                 </div>
-                                                <img class="col-12 img-responsive" src="" alt="">
+                                                <img class="col-12 img-responsive" src="${question.getUrl()}" alt="">
 
 
                                                 <c:set var="answers" value="${question.getListAnswer()}"></c:set>
@@ -201,8 +202,8 @@
                                     <div>
                                         <div>
                                             <ul class="pager d-flex justify-content-around">
-                                                <li id="prev" onclick="showQuestion(${i-1})" class="previous cautruoc btn btn-primary float-left ">Câu trước</li>
-                                                <li id="next" onclick="showQuestion(${i+1})"class="next causau btn btn-primary float-right">Câu sau</li>
+                                                <li id="prev" class="previous cautruoc btn btn-primary float-left ">Câu trước</li>
+                                                <li id="next" class="next causau btn btn-primary float-right">Câu sau</li>
                                             </ul>
                                         </div>
                                     </div>

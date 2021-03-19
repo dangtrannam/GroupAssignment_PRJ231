@@ -5,72 +5,42 @@
  */
 package controller;
 
+import dtos.Account;
 import java.io.IOException;
-import java.util.ArrayList;
-
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author macbookpro2018
  */
-@WebServlet(name = "MainServlet", urlPatterns = {"/MainServlet"})
-public class MainServlet extends HttpServlet {
+@WebServlet(name = "ViewAdminpageController", urlPatterns = {"/ViewAdminpageController"})
+public class ViewAdminpageController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
+    private static String ERROR = "error.jsp";
+    private static String SUCCESS = "adminpage.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
-
         String url = ERROR;
-
-        String action = request.getParameter("action");
-//        String login = "login&register.jsp";
-//        
-//        String main = "MainServlet";
-        String welcomepage = "welcomepage.jsp";
-
-        String loginServlet = "LoginController";
-
-        ArrayList<String> loginActions = new ArrayList<String>();
-        loginActions.add("Login");
-        loginActions.add("Register");
-        loginActions.add("handleLogin");
-        loginActions.add("handleRegister");
-        loginActions.add("Logout");
-
         try {
-            //default page is homepage;
-            if (action == null) {
-                url = welcomepage;
-            } else if (loginActions.contains(action)) {
-                request.setAttribute("action", action);
-                url = loginServlet;
-            } else if (action.equals("viewQuiz")) {
-                url = "ViewQuizController";
-            } else if (action.equals("ChooseQuiz")) {
-                url = "ChooseQuizController";
-            } else if (action.equals("Submit")) {
-                url = "SubmitController";
-            } else if (action.equals("ViewProfileController")) {
-                url = "ViewProfileController";
-            } else if (action.equals("ChangePasswordController")) {
-                url = "ChangePasswordController";
-            }else if(action.equals("goAdminpage")){
-                url = "ViewAdminpageController";
+            HttpSession session = request.getSession(false);
+            Account user = (Account) session.getAttribute("user");
+            if (user!=null || user.getRole().equals("admin")) {
+                
+                url = SUCCESS;
             }
 
         } catch (Exception e) {
-            log("Error at Main Controller: " + e.getMessage());
+            log("Error at View admin page Controller: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
-
         }
     }
 

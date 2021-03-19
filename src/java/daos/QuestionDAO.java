@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.naming.NamingException;
 
 /**
@@ -18,12 +19,13 @@ import javax.naming.NamingException;
  * @author OS
  */
 public class QuestionDAO {
+
     public Question getQuestionByID(String ID) throws NamingException, SQLException {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM Question WHERE QuestionID=?";
-        Question res=null;
+        Question res = null;
         try {
             con = DBUtils.makeConnection();
             if (con != null) {
@@ -31,10 +33,10 @@ public class QuestionDAO {
                 pstm.setString(1, ID);
                 rs = pstm.executeQuery();
                 if (rs.next()) {
-                            AnswerDAO dao=new AnswerDAO();
-                           res=new Question(rs.getString("QuestionID"),
-                                   rs.getString("QuizID"), rs.getString("Question"), 
-                                   rs.getString("ImageUrl"), dao.getAnswersbyQuestionID(ID));
+                    AnswerDAO dao = new AnswerDAO();
+                    res = new Question(rs.getString("QuestionID"),
+                            rs.getString("QuizID"), rs.getString("Question"),
+                            rs.getString("ImageUrl"), dao.getAnswersbyQuestionID(ID));
                 }
             }
         } finally {
@@ -50,5 +52,37 @@ public class QuestionDAO {
         }
         return res;
     }
-    
+
+    public ArrayList<Question> getAllQuestions() throws Exception {
+        ArrayList<Question> list = new ArrayList<Question>();
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Question";
+        try {
+            con = DBUtils.makeConnection();
+            if (con != null) {
+                pstm = con.prepareStatement(sql);
+                rs = pstm.executeQuery();
+                while (rs.next()) {
+                    AnswerDAO dao = new AnswerDAO();
+                    list.add(new Question(rs.getString("QuestionID"),
+                            rs.getString("QuizID"), rs.getString("Question"),
+                            rs.getString("ImageUrl"), dao.getAnswersbyQuestionID(rs.getString("QuestionID"))));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
+
+    }
 }

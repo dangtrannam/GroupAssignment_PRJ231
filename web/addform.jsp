@@ -1,20 +1,21 @@
 <%-- 
-    Document   : profile
-    Created on : Mar 18, 2021, 1:51:17 PM
+    Document   : adminpage
+    Created on : Mar 19, 2021, 11:01:01 AM
     Author     : macbookpro2018
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile Page</title>
+        <title>Adding Page</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/profile.css" >
+        <link rel="stylesheet" href="./css/home.css">
     </head>
-    <body>  
+    <body>
         <header>
             <div class="container">
                 <!-- Start: Navigation with Search -->
@@ -39,16 +40,15 @@
                                     <c:when  test="${not empty sessionScope.user.userName}">
                                         <c:url value="MainServlet?action=ViewProfileController" var ="profileLink"></c:url>
                                         <a  href="${profileLink}" class="btn  btn-sm login " >Welcome <c:out value = "${sessionScope.user.userName}" /></a>
-                                        <c:url value="MainServlet?action=Logout" var="LogoutLink"></c:url>
-                                        <a href="${LogoutLink}" class="btn btn-sm logout ">Đăng xuất</a>
                                     </c:when>
                                     <c:otherwise>
                                         <c:url value="MainServlet?action=Login" var ="LoginLink"></c:url>
                                         <a  href="${LoginLink}" class="btn  btn-sm login " >Đăng nhập</a>
-                                        <c:url value="MainServlet?action=Register" var="ResLink"></c:url>
-                                        <a href="${ResLink}" class="btn btn-sm logout ">Đăng ký</a>
                                     </c:otherwise>
                                 </c:choose>
+
+                                <c:url value="MainServlet?action=Logout" var="LogoutLink"></c:url>
+                                <a href="${LogoutLink}" class="btn btn-sm logout ">Đăng xuất</a>
                             </div>
 
                         </div>
@@ -61,83 +61,25 @@
         </header>
 
         <main>
-            <div class="container">
-                <div class="profile panel">
-                    <form action="ChangePasswordController" method="POST">
-
-                        <table border="1" cellpadding="10">
-                            <c:set var="readonly" value="readonly" />
-                            <tbody>
-                                <tr>
-                            <div class="form-group">
-                                <td> <label for="UserName">Username: </label> </td>
-                                <td> <input type="text" readonly name="UserName" class="form-control" value="${sessionScope.user.getUserName()}" > </td>
-                            </div>
-
-
-                            </tr>
+            <div class="row">
+                <div class="container">
+                    <table class="table table-hover" border="1">
+                        <thead class="thead-light">
                             <tr>
-                                <c:if test="${state=='changePassword'}" var="isChangeState">
-                                    <c:set var="readonly" value="" />
-                                </c:if>
-                            <div class="form-group">
-                                <td> <label for="Password">Password </label> </td>
-                                <td> <input type="text" ${readonly} name="Password" id="Password" class="form-control" value="${sessionScope.user.getPassword()}"> 
-                                    ${requestScope.emptyPass}</td> 
-
-                            </div>
+                                <th></th>
+                                <th></th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+                        </tbody>
+                    </table>
 
-                            <c:if test="${isChangeState}">
-                                <tr>
-                                <div class="form-group">
-                                    <td> <label for="re-Password">Re-Password </label> </td>
-                                    <td> <input type="text" ${readonly} name="re-Password" id="re-Password" class="form-control" value="">
-                                        ${requestScope.emptyRePass}</td>
+                    <a class="btn btn-primary" href="">Add more questions!</a>
 
-                                </div>
-                                </tr>
-                            </c:if>
-
-
-                            <tr>
-                            <div class="form-group">
-                                <td> <label for="role">Role </label> </td>
-                                <td> <input type="text" id="role" readonly class="form-control" value="${sessionScope.user.getRole()}"> </td>
-                            </div>
-
-                            </tr>
-                            </tbody>
-                        </table>
-
-                        <c:choose>
-                            <c:when test="${isChangeState}">
-                                <input type="hidden" value="confirm" name="confirm">
-                                <button type="submit" class="btn btn-primary mt-3">Confirm change</button>
-                            </c:when>
-                            <c:otherwise>
-                                <c:url var="changePassword" value="MainServlet?action=ChangePasswordController" />
-                                <a href="${changePassword}" class="btn btn-primary text-white mt-3">Change password</a>
-                            </c:otherwise>
-                        </c:choose>
-
-
-                    </form>
-
-                    <c:if test="${sessionScope.user.getRole()=='admin'}">
-                        <c:url var="adminpage" value="MainServlet" >
-                            <c:param name="action" value="goAdminpage"></c:param>
-                        </c:url>
-                            <a href="${adminpage}">Go to the admin page</a>
-                    </c:if>
-
-
-                    <c:url var="homepage" value="MainServlet?action=viewQuiz&quiz=A1" />
-                    <a href="${homepage}"> Return to the homepage</a>
                 </div>
             </div>
         </main>
-
 
         <footer>
             <div class="container">
@@ -157,7 +99,6 @@
         </footer>
     </body>
 </html>
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

@@ -16,19 +16,21 @@ $(document).ready(function () {
     $("#show1").addClass("active");
     $("#cauhoi1").addClass("d-block");
     $(".clickcauhoi").click(function () {
-
+        $("#cauhoi" + id).removeClass("d-block");
+        $("#cauhoi" + id).addClass("d-none");
+        $("#show" + id).removeClass("active");
         let ID = $(this).attr("id").trim().slice(4);//skip "cauhoi"
         id = ID;
-        for (let i = 1; i <= 25; i++) {
-            //active questionButton
-            $("#show" + i).removeClass("active");
+//        for (let i = 1; i <= 25; i++) {
+//            //active questionButton
+//            $("#cauhoi" + i).removeClass("d-block");
+//        $("#cauhoi" + i).addClass("d-none");
+//        $("#show" + i).removeClass("active");
+//        }
 
-            //display cauhoi
-            $("#cauhoi" + i).removeClass("d-block");
-            $("#cauhoi" + ID).addClass("d-none");
-        }
-        $("#cauhoi" + ID).addClass("d-block");
-        $("#show" + ID).addClass("active");
+        $("#cauhoi" + id).addClass("d-block");
+        $("#cauhoi" + id).removeClass("d-none");
+        $("#show" + id).addClass("active");
     });
 
 
@@ -41,6 +43,7 @@ $(document).ready(function () {
 //    });
 //
     $("#next").click(function () {
+        console.log("next");
         $("#cauhoi" + id).removeClass("d-block");
         $("#cauhoi" + id).addClass("d-none");
         $("#show" + id).removeClass("active");
@@ -52,6 +55,7 @@ $(document).ready(function () {
 //
 //
     $("#prev").click(function () {
+        console.log('pre');
         $("#cauhoi" + id).removeClass("d-block");
         $("#cauhoi" + id).addClass("d-none");
         $("#show" + id).removeClass("active");
@@ -78,13 +82,20 @@ $(document).ready(function () {
             remainingSeconds = "0" + remainingSeconds;
         }
 
-        document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
-        
+        let countdown = document.getElementById('countdown');
+        if (countdown != null) {
+            countdown.innerHTML = minutes + ":" + remainingSeconds;
+        } else {
+            clearInterval(countdownTimer);
+        }
+
+
+
         if (seconds === -1) {
             clearInterval(countdownTimer);
             confirm("Hết thời gian");
             $('#f-doquiz').submit();
-            document.getElementById('countdown').innerHTML = "Finish!";
+            countdown.innerHTML = "Finish!";
         } else {
             seconds--;
         }

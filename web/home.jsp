@@ -19,7 +19,7 @@
                 <!-- Start: Navigation with Search -->
                 <nav role="navigation"
                      class="navbar navbar-dark navbar-expand-md bg-success border rounded navigation-clean-search relative">
-                    <div class="container"><a class="navbar-brand homepage" href="MainServlet?action=viewQuiz&type=A1">Trang chủ</a>
+                    <div class="container"><a class="navbar-brand homepage" href="MainServlet">Trang chủ</a>
                         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="navbar-toggler-icon"></span>
@@ -38,15 +38,18 @@
                                     <c:when  test="${not empty sessionScope.user.userName}">
                                         <c:url value="MainServlet?action=ViewProfileController" var ="profileLink"></c:url>
                                         <a  href="${profileLink}" class="btn  btn-sm login " >Welcome <c:out value = "${sessionScope.user.userName}" /></a>
+                                        <c:url value="MainServlet?action=Logout" var="LogoutLink"></c:url>
+                                        <a href="${LogoutLink}" class="btn btn-sm logout ">Đăng xuất</a>
                                     </c:when>
                                     <c:otherwise>
                                         <c:url value="MainServlet?action=Login" var ="LoginLink"></c:url>
                                         <a  href="${LoginLink}" class="btn  btn-sm login " >Đăng nhập</a>
+                                        <c:url value="MainServlet?action=Register" var="ResLink"></c:url>
+                                        <a href="${ResLink}" class="btn btn-sm logout ">Đăng ký</a>
                                     </c:otherwise>
                                 </c:choose>
 
-                                <c:url value="MainServlet?action=Logout" var="LogoutLink"></c:url>
-                                <a href="${LogoutLink}" class="btn btn-sm logout ">Đăng xuất</a>
+
                             </div>
 
                         </div>
@@ -86,12 +89,13 @@
                             <c:set var="list" value="${requestScope.listID}"></c:set>
                             <c:forEach items="${list}" var="id">
 
-                                <a class="btn btn-success test"
+                                <a class="btn btn-success test d-inline"
                                    href="MainServlet?action=ChooseQuiz&QuizID=${id}&type=${requestScope.type}"> Đề ${id}</a>
 
+
                             </c:forEach>
-                             <a class="btn btn-success test"
-                                   href="MainServlet?action=ChooseQuiz&type=${requestScope.type}"> Đề random</a>
+                            <a class="btn btn-success test d-inline"
+                               href="MainServlet?action=ChooseQuiz&type=${requestScope.type}"> Đề ngẫu nhiên</a>
                         </div>
                     </div>
                 </div>

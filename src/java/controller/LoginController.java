@@ -29,20 +29,23 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String action = request.getParameter("action");
-        
+
         String login = "login&register.jsp";
         String main = "MainServlet";
-       
-        String success="MainServlet?action=viewQuiz&type=A1";
+
+        String success = "welcomepage.jsp";
         String url = ERROR;
+        
         if (action == null) {
             url = main;
-        }else url = login;
+        } else {
+            url = login;
+        }
 
         try {
             if (action.equals("Register")) {
                 request.setAttribute("action", "Register");
-                
+
             } else if (action.equals("Login")) {
                 request.setAttribute("action", "Login");
 
@@ -55,10 +58,11 @@ public class LoginController extends HttpServlet {
                 acc.setRole(accDAO.login(acc));
 
                 if (!acc.getRole().isEmpty()) {
-                    
+
                     url = success;
                     HttpSession session = request.getSession();
                     session.setAttribute("user", acc);
+
                 } else {
                     request.removeAttribute("action");
                     request.setAttribute("action", "Login");
@@ -69,7 +73,6 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession(false);
                 if (session != null) {
                     session.removeAttribute("user");
-                    
                     request.setAttribute("action", "Login");
                 }
             } else if (action.equals("handleRegister")) {
@@ -92,7 +95,7 @@ public class LoginController extends HttpServlet {
             }
 
         } catch (Exception e) {
-            log("Error at LoginController: "+e.getMessage());
+            log("Error at LoginController: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
