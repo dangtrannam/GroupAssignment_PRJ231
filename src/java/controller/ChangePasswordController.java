@@ -33,27 +33,29 @@ public class ChangePasswordController extends HttpServlet {
 
             //Check session first, if there is no user -> return to the login page
             HttpSession session = request.getSession(false);
-            Account user = (Account) session.getAttribute("user");
-            if (user != null) {
+            if (session != null) {
+                Account user = (Account) session.getAttribute("user");
+                if (user != null) {
 
-                //if there is confirm action request from the Profile page, check & change the password!
-                String confirm = request.getParameter("confirm") == null ? "" : request.getParameter("confirm");
-                if (confirm.equals("confirm")) {
+                    //if there is confirm action request from the Profile page, check & change the password!
+                    String confirm = request.getParameter("confirm") == null ? "" : request.getParameter("confirm");
+                    if (confirm.equals("confirm")) {
 
-                    request.setAttribute("Password", request.getParameter("Password"));
-                    request.setAttribute("re-Password", request.getParameter("re-Password"));
-                    
-                    session.setAttribute("user", user);
-                    url = "CheckPasswordController";
+                        request.setAttribute("Password", request.getParameter("Password"));
+                        request.setAttribute("re-Password", request.getParameter("re-Password"));
 
-                } else {
-                    request.setAttribute("state", "changePassword");
-                    url = SUCCESS;
+                        session.setAttribute("user", user);
+                        url = "CheckPasswordController";
+
+                    } else {
+                        request.setAttribute("state", "changePassword");
+                        url = SUCCESS;
+                    }
+
+                } else {//View profile
+                    request.setAttribute("INVALID", "<p class='text-danger'>You don't have permission to use this function!</p>");
+                    url = INVALID;
                 }
-
-            } else {//View profile
-                request.setAttribute("INVALID", "<p class='text-danger'>You don't have permission to use this function!</p>");
-                url = INVALID;
             }
 
         } catch (Exception e) {

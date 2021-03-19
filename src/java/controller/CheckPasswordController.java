@@ -54,6 +54,7 @@ public class CheckPasswordController extends HttpServlet {
                         boolean check = accDao.changePassword(new Account(user.getUserName(), password, user.getRole()));
                         if (check) {
                             session.removeAttribute("user");
+                            request.setAttribute("INVALID", "<p class='text-success'>Change password success!</p>");
                             url = SUCCESS;
                         }
                     }

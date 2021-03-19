@@ -34,6 +34,7 @@ public class DeleteQuizController extends HttpServlet {
         try {
             HttpSession session = request.getSession(false);
             Account user = (Account) session.getAttribute("user");
+            System.out.println(user);
             if (user != null || user.getRole().equals("admin")) {
                 String QuizID = request.getParameter("QuizID");
                 QuizDAO qDao = new QuizDAO();
