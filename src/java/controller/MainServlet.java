@@ -64,6 +64,9 @@ public class MainServlet extends HttpServlet {
                 url = "ChangePasswordController";
             }else if(action.equals("goAdminpage")){
                 url = "ViewAdminpageController";
+            }else if(action.equals("DeleteQuiz")){
+                request.setAttribute("QuizID", request.getAttribute("QuizID"));
+                url = "DeleteQuizController";
             }
 
         } catch (Exception e) {
