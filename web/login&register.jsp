@@ -64,7 +64,7 @@
                                 </div>
                             </c:otherwise>
                         </c:choose>
-
+                        <a class="ForgetPwd" href="MainServlet">Return to homepage</a>
                     </form>
 
                 </div>

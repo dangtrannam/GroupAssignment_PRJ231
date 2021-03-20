@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
 
         String success = "welcomepage.jsp";
         String url = ERROR;
-        
+
         if (action == null) {
             url = main;
         } else {
@@ -80,10 +80,10 @@ public class LoginController extends HttpServlet {
                 String userForm = request.getParameter("uname");
                 String passForm = request.getParameter("psw");
                 String repassForm = request.getParameter("re-psw");
-
+                request.setAttribute("action", "Login");
                 String msg = "<p class='text-danger'>Register failed!</p>";
-
-                if (passForm.equals(repassForm)) {
+                request.setAttribute("msg", msg);
+                if (passForm.equals(repassForm)&&!userForm.trim().isEmpty()&&!passForm.trim().isEmpty()) {
                     Account acc = new Account(userForm, passForm, "user");
                     AccountDAO accDAO = new AccountDAO();
                     if (accDAO.register(acc)) {
@@ -92,7 +92,7 @@ public class LoginController extends HttpServlet {
                 }
 
                 request.setAttribute("msg", msg);
-                request.setAttribute("action", "Login");
+
             }
 
         } catch (Exception e) {

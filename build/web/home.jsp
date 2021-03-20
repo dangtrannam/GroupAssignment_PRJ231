@@ -97,8 +97,8 @@
                                 </c:when>
                                 <c:when test="${type=='B1'}">
                                 <h3 class="text-center text-primary">CẤU TRÚC ĐỀ THI BẰNG LÁI XE Ô TÔ TRỰC TUYẾN</h3>
-                                <p>Đề thi lý thuyết bằng lái xe B2 - C online  mỗi đề gồm 30 câu, mỗi câu hỏi chỉ có 1 đáp án đúng.
-                                    Trong mỗi đề thi lý thuyết lái xe B2 online sẽ gồm: 9 câu hỏi biển báo giao thông, 9 câu giải sa hình, 9 câu hỏi luật giao thông và các quy tắc khi tham gia giao thông an toàn, 
+                                <p>Đề thi lý thuyết bằng lái xe B1 - C online  mỗi đề gồm 30 câu, mỗi câu hỏi chỉ có 1 đáp án đúng.
+                                    Trong mỗi đề thi lý thuyết lái xe B1 online sẽ gồm: 9 câu hỏi biển báo giao thông, 9 câu giải sa hình, 9 câu hỏi luật giao thông và các quy tắc khi tham gia giao thông an toàn, 
                                     1 câu hỏi về kinh doanh vận tải, 1 câu kỹ thuật lái xe Ôtô và sửa chữa cơ bản, cuối cùng là 1 câu đạo đức của người lái xe.</p>
                                 <ul>
                                     <li>Số lượng câu hỏi:&nbsp;<strong>30 câu</strong>.</li>
@@ -111,7 +111,7 @@
                                 </c:when>
                                 <c:when test="${type=='B2'}">
                                 <h3 class="text-center text-primary">CẤU TRÚC ĐỀ THI BẰNG LÁI XE Ô TÔ TRỰC TUYẾN</h3>
-                                <p>Cấu trúc bộ đề thi sát hạch giấy phép lái xe hạng A1 sẽ bao gồm 25 câu hỏi, mỗi câu hỏi chỉ có duy nhất 
+                                <p>Cấu trúc bộ đề thi sát hạch giấy phép lái xe hạng B2 sẽ bao gồm 30 câu hỏi, mỗi câu hỏi chỉ có duy nhất 
                                     1 đáp trả lời đúng phản ánh đúng bản chất của thi trắc nghiệm. Khác hẳn với bộ đề thi luật cũ là 2 đáp án. Mỗi đề thi chúng tôi sẽ bố trí từ 2 - 4 
                                     câu hỏi điểm liệt để học viên có thể làm quen và ghi nhớ, tránh việc làm sai câu hỏi liệt.</p>
                                 <ul>

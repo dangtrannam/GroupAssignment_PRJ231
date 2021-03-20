@@ -67,8 +67,7 @@ $(document).ready(function () {
         $("#show" + id).addClass("active");
     })
 
-    var seconds = 1140;
-//    var seconds = 60;
+    var seconds = 60;
 
 
     function timer() {
