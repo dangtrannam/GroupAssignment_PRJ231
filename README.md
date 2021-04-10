@@ -3,4 +3,4 @@
 
 * .gitinore file
 * README.md file
-U+00A9 ád
+© NGOC
