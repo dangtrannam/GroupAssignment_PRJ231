@@ -4,5 +4,6 @@
 * .gitinore file
 * README.md file
 
-
-© NGOC
+### Connect me via: 
+#### Facebook: https://www.facebook.com/ThanhNgoc542001
+© Thanh Ngoc
