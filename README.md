@@ -3,4 +3,4 @@
 
 * .gitinore file
 * README.md file
-@ a
+U+00A9 ád
