@@ -6,5 +6,6 @@
 
 ### Connect me via: 
 #### Facebook: https://www.facebook.com/ThanhNgoc542001
-#### [My FaceBook](https://www.facebook.com/ThanhNgoc542001)
-© Thanh Ngoc
+#### [Thanh Ngọc Facebook](https://www.facebook.com/ThanhNgoc542001)
+#### Đặng Trần Nam [Facebook](https://www.facebook.com/TranNam1706)
+© Thanh Ngoc & Tran Nam
